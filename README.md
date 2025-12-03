@@ -15,7 +15,9 @@ that their creation and usage originated in Black communities. Many of the insta
 being used by individuals outside of Black communities it is used improperly and in a manner
 that is flippant usually in the context of a joke, or being the joke itself. This type of flagrant
 usage of AAVE has been coined digital blackface.
-workflow: identifies libraries used and explains the important steps being taken in the
+
+# Workflow: 
+identifies libraries used and explains the important steps being taken in the
 code.
 
 # Further Study:  
