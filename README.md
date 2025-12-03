@@ -25,8 +25,12 @@ become more commonly used in media. This project could easily be expanded to cov
 types of media (e.g., more genres of film, investigate TV episode scripts, help analyze trends
 in books). It could also be used as a tool to analyze memes and social trends to see if there is
 significant AAVE usage and if the context in which it’s used is correct.
-files list: a list of files relevant to the project (python notebooks, csv files, etc) and a brief
+
+# Files List: 
+
+a list of files relevant to the project (python notebooks, csv files, etc) and a brief
 description of what each file contains
+
 A note about formatting: except the title and list of files, each of these items should have about a
 paragraph (3-5 sentences) of text. The readme is generally written in Markdown, but it can also be
 written in plain text .txt.
