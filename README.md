@@ -16,8 +16,9 @@ that is flippant usually in the context of a joke, or being the joke itself. Thi
 usage of AAVE has been coined digital blackface.
 
 ## Workflow: 
-identifies libraries used and explains the important steps being taken in the
-code.
+I used pandas to store both scripts and tweets in dataframes so I can keep titles, file paths, and cleaned text together. I load my AAVE dictionary from a CSV file using pandas, then use re to count how often each AAVE term appears in a given text. These values are added back into the scripts and tweets dataframes as columns as normalized metrics for the amount of AAVE usage within each dataframe.
+
+To capture semantic similarity, I use the sentence_transformers library (model "all-MiniLM-L6-v2") to convert each script and tweet into an embedding. These embeddings are computed from columns in the dataframes and stored as NumPy arrays. Then, I use the scikit-learn cosine_similarity function to build a similarity matrix, where each cell represents the semantic similarity between a specific script and a specific tweet. I compute each script's average cosine similarity to the entire tweet corpus. At the tweet level, I do the same but with respect to all scripts.
 
 ## Further Study:  
 Future research with this work could be to map the wider flow of AAVE adoption into the popular
@@ -29,9 +30,10 @@ significant AAVE usage and if the context in which it’s used is correct.
 
 ## Files List: 
 
-a list of files relevant to the project (python notebooks, csv files, etc) and a brief
-description of what each file contains
+1. Semantic_similarity.ipynb: This notebook contains the full workflow for loading movie scripts, cleaning text, embedding scripts and tweets, and computing cosine similarity.
 
-A note about formatting: except the title and list of files, each of these items should have about a
-paragraph (3-5 sentences) of text. The readme is generally written in Markdown, but it can also be
-written in plain text .txt.
+2. Aave_Dictionary.csv:  A CSV file of the AAVE Master List. It contains a column for the specific terms and another column for their definitions.
+
+3. Scripts (folder): Each file contains the raw movie script text. The filenames (e.g., Superbad.txt, Bridesmaids.txt) get used as the script titles. The corpus they are from pulled from: https://nlds.soe.ucsc.edu/fc2
+
+4. Black_Twitter.json: Scraped tweets in json format from the AAVE Corpus: https://github.com/jazmiahenry/aave_corpora/tree/main
