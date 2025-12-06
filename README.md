@@ -12,7 +12,7 @@ terms have been adopted into the wider English vocabulary with many ignorant to 
 that their creation and usage originated in Black communities. Many of the instances AAVE is
 being used by individuals outside of Black communities it is used improperly and in a manner
 that is flippant usually in the context of a joke, or being the joke itself. This type of flagrant
-usage of AAVE has been coined digital blackface.
+usage of AAVE has been coined digital blackface. Analyzing how these pieces of media implement AAVE to augment their comedic effect and what picture it creates of Black people and the way they express themselves is the ultimate goal of this project.
 
 ## Workflow: 
 I used pandas to store both scripts and tweets in dataframes so I can keep titles, file paths, and cleaned text together. I load my AAVE dictionary from a CSV file using pandas, then use re to count how often each AAVE term appears in a given text. These values are added back into the scripts and tweets dataframes as columns as normalized metrics for the amount of AAVE usage within each dataframe.
