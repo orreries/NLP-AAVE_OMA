@@ -3,9 +3,8 @@
 ## Project Description: 
 This project analyzes the incorporation of African American Vernacular English (AAVE) into popular scripted media.
 Using Natural Language Processing (NLP) techniques, this project will utilize a model to
-assess the semantic similarity between around 300 comedy movie scripts and the AAVE
-Corpus. An accompanying sentiment analysis to examine the overall positive or negative
-usage of AAVE phrases will also be implemented.
+assess the semantic similarity between comedy movie scripts and the AAVE
+Corpus.
 
 ## Rationale Statement: 
 This project is being used to interrogate the way that AAVE is assimilated into the wider English lexicon. AAVE
