@@ -1340,6 +1340,29 @@
 
         initDragging();
       });
+
+      // Smooth scroll for Reflections table of contents
+document.addEventListener("DOMContentLoaded", function () {
+  const container = document.getElementById("reflections-body");
+  if (!container) return;
+
+  const tocLinks = container.querySelectorAll(".toc a");
+
+  tocLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      const target = container.querySelector(targetId);
+      if (!target) return;
+
+      container.scrollTo({
+        top: target.offsetTop - 8, // small offset under the TOC
+        behavior: "smooth",
+      });
+    });
+  });
+});
+
     </script>
 
     <audio
