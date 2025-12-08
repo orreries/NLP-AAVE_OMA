@@ -41,6 +41,8 @@ significant AAVE usage and if the context in which it’s used is correct.
 4. black_tweets_joined_clean.csv: Cleaned corpus of tweets from Black Twitter. Tweets from the Twitter API from the AAVE Corpus: https://github.com/jazmiahenry/aave_corpora/tree/main
 
 ## Citations
+Sidnell, J. (2002). *Outline of AAVE grammar*. https://cdt.org/wp-content/uploads/2017/11/Outline_of_AAVE_grammar___Jack_Sidnell_2002_1_Afr.pdf
+
 Richomme, O. (2012). *The post-racial illusion: Racial politics and inequality in the age of Obama*. *Revue de recherche en civilisation américaine*, (3). [http://journals.openedition.org/rrca/464](http://journals.openedition.org/rrca/464)
 
 Powell, J. A. (2009). Post-racialism or targeted universalism. *Denver University Law Review, 86*, 785.
