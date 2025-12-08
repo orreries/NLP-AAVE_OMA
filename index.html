@@ -889,206 +889,199 @@
     </div>
 
     <!-- Core JS -->
-    <script>
-      // Map window ids <-> taskbar button ids
-      const windowToButton = {
-        "network-window": "network-button",
-        "projects-window": "projects-button",
-        "cmd-window": "cmd-button",
-        "browser-window": "browser-button",
-        "guestbook-window": "guestbook-button",
-      };
+  <script>
+    // Map window ids <-> taskbar button ids
+    const windowToButton = {
+      "network-window": "network-button",
+      "projects-window": "projects-button",
+      "cmd-window": "cmd-button",
+      "browser-window": "browser-button",
+      "guestbook-window": "guestbook-button",
+    };
 
-      function setButtonActive(windowId, isActive) {
-        const btnId = windowToButton[windowId];
-        if (!btnId) return;
-        const btn = document.getElementById(btnId);
-        if (!btn) return;
+    function setButtonActive(windowId, isActive) {
+      const btnId = windowToButton[windowId];
+      if (!btnId) return;
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
 
-        if (isActive) {
-          btn.style.display = "flex";
-          btn.classList.add("active");
-        } else {
-          btn.style.display = "none";
-          btn.classList.remove("active");
-        }
+      if (isActive) {
+        btn.style.display = "flex";
+        btn.classList.add("active");
+      } else {
+        btn.style.display = "none";
+        btn.classList.remove("active");
+      }
+    }
+
+    // Toggle show/hide a window
+    function toggleWindow(windowId, action) {
+      const win = document.getElementById(windowId);
+      if (!win) return;
+
+      if (action === "close") {
+        win.style.display = "none";
+        setButtonActive(windowId, false);
+        return;
       }
 
-      // Toggle show/hide a window
-      function toggleWindow(windowId, action) {
-        const win = document.getElementById(windowId);
-        if (!win) return;
+      const current = win.style.display;
+      if (current === "none" || current === "") {
+        win.style.display = "block";
+        setButtonActive(windowId, true);
+      } else {
+        win.style.display = "none";
+        setButtonActive(windowId, false);
+      }
+    }
 
-        if (action === "close") {
-          win.style.display = "none";
-          setButtonActive(windowId, false);
+    // Maximize toggle
+    function maximizeWindow(windowId) {
+      const win = document.getElementById(windowId);
+      if (!win) return;
+
+      const isMax = win.dataset.maximized === "true";
+
+      if (!isMax) {
+        win.dataset.prevWidth = win.style.width;
+        win.dataset.prevHeight = win.style.height;
+
+        win.style.position = "fixed";
+        win.style.top = "0";
+        win.style.left = "0";
+        win.style.right = "0";
+        win.style.bottom = "40px";
+
+        win.dataset.maximized = "true";
+      } else {
+        win.style.position = "";
+        win.style.top = "";
+        win.style.left = "";
+        win.style.right = "";
+        win.style.bottom = "";
+
+        win.style.width = win.dataset.prevWidth || win.style.width;
+        win.style.height = win.dataset.prevHeight || win.style.height;
+
+        win.dataset.maximized = "false";
+      }
+    }
+
+    // Desktop icon click handler
+    function doubleClick(iconId, target) {
+      const clickSound = document.getElementById("click-sound");
+      if (clickSound) {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(() => {});
+      }
+
+      if (target === "toggle") {
+        const map = {
+          network: "network-window",
+          projects: "projects-window",
+          cmd: "cmd-window",
+          browser: "browser-window",
+          guestbook: "guestbook-window",
+        };
+        const winId = map[iconId];
+        if (winId) toggleWindow(winId);
+      } else if (target) {
+        window.open(target, "_blank");
+      }
+    }
+
+    // XP Clock
+    function updateClock() {
+      const clock = document.getElementById("clock");
+      if (!clock) return;
+
+      const now = new Date();
+      let h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, "0");
+      const ampm = h >= 12 ? "PM" : "AM";
+      h = ((h + 11) % 12) + 1;
+
+      clock.textContent = `${h}:${m} ${ampm}`;
+    }
+
+    // Window dragging
+    function initDragging() {
+      let active = null;
+      let offsetX = 0;
+      let offsetY = 0;
+      let z = 10;
+
+      document.querySelectorAll(".move .title-bar").forEach((bar) => {
+        bar.style.cursor = "move";
+
+        bar.addEventListener("mousedown", (e) => {
+          const container = bar.closest(".move");
+          if (!container) return;
+
+          active = container;
+          z += 1;
+          active.style.zIndex = z;
+
+          const rect = active.getBoundingClientRect();
+          offsetX = e.clientX - rect.left;
+          offsetY = e.clientY - rect.top;
+
+          document.addEventListener("mousemove", onMouseMove);
+          document.addEventListener("mouseup", onMouseUp);
+        });
+      });
+
+      function onMouseMove(e) {
+        if (!active) return;
+
+        if (e.buttons === 0) {
+          onMouseUp();
           return;
         }
 
-        const current = win.style.display;
-        if (current === "none" || current === "") {
-          win.style.display = "block";
-          setButtonActive(windowId, true);
-        } else {
-          win.style.display = "none";
-          setButtonActive(windowId, false);
-        }
+        let newLeft = e.clientX - offsetX;
+        let newTop = e.clientY - offsetY;
+
+        // prevent off top
+        if (newTop < 0) newTop = 0;
+
+        active.style.left = `${newLeft}px`;
+        active.style.top = `${newTop}px`;
       }
 
-      // Maximize toggle
-      function maximizeWindow(windowId) {
-        const win = document.getElementById(windowId);
-        if (!win) return;
-
-        const isMax = win.dataset.maximized === "true";
-
-        if (!isMax) {
-          win.dataset.prevWidth = win.style.width;
-          win.dataset.prevHeight = win.style.height;
-
-          win.style.position = "fixed";
-          win.style.top = "0";
-          win.style.left = "0";
-          win.style.right = "0";
-          win.style.bottom = "40px";
-
-          win.dataset.maximized = "true";
-        } else {
-          win.style.position = "";
-          win.style.top = "";
-          win.style.left = "";
-          win.style.right = "";
-          win.style.bottom = "";
-
-          win.style.width = win.dataset.prevWidth || win.style.width;
-          win.style.height = win.dataset.prevHeight || win.style.height;
-
-          win.dataset.maximized = "false";
-        }
+      function onMouseUp() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+        active = null;
       }
+    } // ← THIS WAS MISSING
 
-      // Desktop icon click handler
-      function doubleClick(iconId, target) {
-        const clickSound = document.getElementById("click-sound");
-        if (clickSound) {
-          clickSound.currentTime = 0;
-          clickSound.play().catch(() => {});
-        }
-
-        if (target === "toggle") {
-          const map = {
-            network: "network-window",
-            projects: "projects-window",
-            cmd: "cmd-window",
-            browser: "browser-window",
-            guestbook: "guestbook-window",
-          };
-          const winId = map[iconId];
-          if (winId) toggleWindow(winId);
-        } else if (target) {
-          window.open(target, "_blank");
-        }
-      }
-
-      // XP Clock
-      function updateClock() {
-        const clock = document.getElementById("clock");
-        if (!clock) return;
-
-        const now = new Date();
-        let h = now.getHours();
-        const m = String(now.getMinutes()).padStart(2, "0");
-        const ampm = h >= 12 ? "PM" : "AM";
-        h = ((h + 11) % 12) + 1;
-
-        clock.textContent = `${h}:${m} ${ampm}`;
-      }
-
-      // Window dragging
-      function initDragging() {
-        let active = null;
-        let offsetX = 0;
-        let offsetY = 0;
-        let z = 10;
-
-        document.querySelectorAll(".move .title-bar").forEach((bar) => {
-          bar.style.cursor = "move";
-
-          bar.addEventListener("mousedown", (e) => {
-            const container = bar.closest(".move");
-            if (!container) return;
-
-            active = container;
-            z += 1;
-            active.style.zIndex = z;
-
-            const rect = active.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
-
-            document.addEventListener("mousemove", onMouseMove);
-            document.addEventListener("mouseup", onMouseUp);
-          });
+    // Initialize everything
+    document.addEventListener("DOMContentLoaded", function () {
+      if (document.querySelector("#projects-table")) {
+        new DataTable("#projects-table", {
+          paging: false,
+          info: false,
+          lengthChange: false,
+          searching: true,
+          ordering: true,
+          scrollY: "460px",
+          scrollCollapse: true,
+          scrollX: true,
+          order: [[2, "desc"]],
         });
+      }
 
-        function onMouseMove(e) {
-          if (!active) return;
-
-          // if button not pressed anymore, stop dragging
-          if (e.buttons === 0) {
-            onMouseUp();
-            return;
-          }
-
-          let newLeft = e.clientX - offsetX;
-          let newTop = e.clientY - offsetY;
-
-          // 🔒 don't allow the window to go above the top of the screen
-          if (newTop < 0) newTop = 0;
-
-          // (optional) you can leave left unconstrained so you can still drag it sideways
-          active.style.left = `${newLeft}px`;
-          active.style.top = `${newTop}px`;
-          } 
-
-        function onMouseUp() {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
-      active = null;
-    }
-  } // ← THIS WAS MISSING
-          
-      // Initialize everything
-      document.addEventListener("DOMContentLoaded", function () {
-        // Initialize DataTable
-        if (document.querySelector("#projects-table")) {
-          new DataTable("#projects-table", {
-            paging: false,
-            info: false,
-            lengthChange: false,
-            searching: true,
-            ordering: true,
-            scrollY: "460px",
-            scrollCollapse: true,
-            scrollX: true,
-            order: [[2, "desc"]],
-          });
-        }
-
-        // hide all taskbar tabs on load
-        Object.keys(windowToButton).forEach((winId) => {
-          setButtonActive(winId, false);
-        });
-
-        // Start clock
-        updateClock();
-        setInterval(updateClock, 60000);
-
-        // Enable drag
-        initDragging();
+      Object.keys(windowToButton).forEach((winId) => {
+        setButtonActive(winId, false);
       });
-    </script>
 
+      updateClock();
+      setInterval(updateClock, 60000);
+
+      initDragging();
+    });
+  </script>
     <audio
       id="click-sound"
       src="assets/audio/click.mp3"
