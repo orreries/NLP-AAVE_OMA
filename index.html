@@ -12,18 +12,89 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 <style>
-  /* Tidy up spacing in the Projects window */
+  /* Projects window: overall body */
+  #projects {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
   #projects h3 {
     margin: 0 0 0.25rem;
   }
 
   #projects p {
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
   }
 
-  /* Push the DataTables length dropdown down a bit */
+  /* DataTables wrapper spacing */
   #projects .dataTables_wrapper {
     margin-top: 0.25rem;
+  }
+
+  #projects .dataTables_length,
+  #projects .dataTables_info {
+    font-size: 0.75rem;
+  }
+
+  #projects .dataTables_filter label {
+    font-size: 0.8rem;
+  }
+
+  #projects .dataTables_filter input {
+    height: 1.3rem;
+    font-size: 0.8rem;
+  }
+
+  /* Table look */
+  #projects-table {
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+
+  #projects-table th,
+  #projects-table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #ccc;
+    vertical-align: top;
+  }
+
+  /* Header styling */
+  #projects-table thead th {
+    background: #003399;
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    white-space: nowrap;
+  }
+
+  /* Zebra striping */
+  #projects-table tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+
+  /* Numeric columns right-aligned & tight */
+  #projects-table td:nth-child(2),
+  #projects-table td:nth-child(3),
+  #projects-table td:nth-child(4),
+  #projects-table td:nth-child(5),
+  #projects-table td:nth-child(6),
+  #projects-table td:nth-child(7),
+  #projects-table td:nth-child(8) {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Tweets column: smaller text, wraps nicely */
+  #projects-table td:last-child {
+    width: 40%;
+    font-size: 0.75rem;
+  }
+
+  #projects-table td:last-child ol {
+    margin: 0;
+    padding-left: 1.1rem;
   }
 </style>
 
@@ -197,7 +268,7 @@
     </div>
 
     <div class="move" id="projects-container">
-        <div class="window" id="projects-window" style="width: 775px; max-width: 90vw">
+        <div class="window" id="projects-window" style="width: 750px; max-width: 90vw">
         <div class="title-bar">
           <div class="title-bar-text">
             <img
@@ -723,17 +794,21 @@
       </div>
       <div class="time" id="clock">00:00 PM</div>
     </div>
-    <script>
+   <script>
   document.addEventListener("DOMContentLoaded", function () {
     if (document.querySelector('#projects-table')) {
-      new DataTable('#projects-table');
+      new DataTable('#projects-table', {
+        paging: false,         // no page numbers
+        info: false,           // hide "Showing 1 to 10 of X entries"
+        lengthChange: false,   // hide "Show 10 / 25 / 50"
+        searching: true,       // keep search
+        ordering: true,        // keep sorting
+        scrollY: '460px',      // table scrolls inside the window
+        scrollCollapse: true,
+        scrollX: true,         // allow horizontal scroll if needed
+        order: [[2, 'desc']]   // default sort: cosine similarity, highest first
+      });
     }
   });
 </script>
-  </body>
-  <script src="./js/script.js"></script>
-  <script type="module" src="./js/firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
-  <script async src="//iframely.net/embed.js"></script>
 </html>
