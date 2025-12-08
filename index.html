@@ -837,13 +837,25 @@
 
         const current = win.style.display;
         if (current === "none" || current === "") {
+        // show the window
           win.style.display = "block";
           setButtonActive(windowId, true);
-        } else {
-          win.style.display = "none";
-          setButtonActive(windowId, false);
-        }
-      }
+
+        // make sure it's at least partially on-screen
+        const rect = win.getBoundingClientRect();
+        let top = rect.top;
+        let left = rect.left;
+
+        if (isNaN(top) || top < 0) top = 60; // default 60px from top
+        if (isNaN(left) || left < 0) left = 60; // default from left
+
+        win.style.top = `${top}px`;
+          win.style.left = `${left}px`;
+    }   else {
+        win.style.display = "none";
+        setButtonActive(windowId, false);
+    }
+
 
       // Maximize toggle
       function maximizeWindow(windowId) {
