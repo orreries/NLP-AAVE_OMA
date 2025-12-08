@@ -104,7 +104,7 @@
     <div
       class="icon my-computer"
       id="my-computer"
-      ondblclick="doubleClick('my-computer', 'https://github.com/orreries/NLP-AAVE_OMA')"
+      onclick="doubleClick('my-computer', 'https://github.com/orreries/NLP-AAVE_OMA')"
 >
 
       <img src="./assets/images/computer.avif" alt="computer icon" />
@@ -114,7 +114,7 @@
     <div
       class="icon network"
       id="network"
-      ondblclick="doubleClick('network', 'toggle')"
+      onclick="doubleClick('network', 'toggle')"
     >
       <img src="./assets/images/network.avif" alt="Network icon" />
       <div class="icon-name">Network</div>
@@ -123,13 +123,13 @@
     <div
       class="icon projects"
       id="projects"
-      ondblclick="doubleClick('projects', 'toggle')"
+      onclick="doubleClick('projects', 'toggle')"
     >
       <img src="./assets/images/documents.avif" alt="Documents icon" />
       <div class="icon-name">Projects</div>
     </div>
 
-    <div class="icon cmd" id="cmd" ondblclick="doubleClick('cmd', 'toggle')">
+    <div class="icon cmd" id="cmd" onclick="doubleClick('cmd', 'toggle')">
       <img src="./assets/images/cmd.avif" alt="cmd icon" />
       <div class="icon-name">cmd</div>
     </div>
@@ -137,7 +137,7 @@
     <div
       class="icon ie"
       id="browser"
-      ondblclick="doubleClick('browser', 'toggle')"
+      onclick="doubleClick('browser', 'toggle')"
     >
       <img src="./assets/images/ie.avif" alt="internet explorer icon" />
       <div class="icon-name">Internet Explorer</div>
@@ -146,7 +146,7 @@
     <div
       class="icon ie"
       id="guestbook"
-      ondblclick="doubleClick('guestbook', 'toggle')"
+      onclick="doubleClick('guestbook', 'toggle')"
     >
       <img src="./assets/images/guestbook.avif" alt="guestbook" />
       <div class="icon-name">Guestbook</div>
@@ -167,11 +167,11 @@
           <div class="title-bar-controls">
             <button
               aria-label="Minimize"
-              ondblclick="toggleWindow('network-window')"
+              onclick="toggleWindow('network-window')"
             ></button>
             <button
               aria-label="Close"
-              ondblclick="toggleWindow('network-window', 'close')"
+              onclick="toggleWindow('network-window', 'close')"
             ></button>
           </div>
         </div>
@@ -250,11 +250,11 @@
           <div class="title-bar-controls">
             <button
               aria-label="Minimize"
-              ondblclick="toggleWindow('cmd-window')"
+              onclick="toggleWindow('cmd-window')"
             ></button>
             <button
               aria-label="Close"
-              ondblclick="toggleWindow('cmd-window', 'close')"
+              onclick="toggleWindow('cmd-window', 'close')"
             ></button>
           </div>
         </div>
@@ -282,11 +282,11 @@
           <div class="title-bar-controls">
             <button
               aria-label="Minimize"
-              ondblclick="toggleWindow('projects-window')"
+              onclick="toggleWindow('projects-window')"
             ></button>
             <button
               aria-label="Close"
-              ondblclick="toggleWindow('projects-window', 'close')"
+              onclick="toggleWindow('projects-window', 'close')"
             ></button>
           </div>
         </div>
@@ -685,15 +685,15 @@
           <div class="title-bar-controls">
             <button
               aria-label="Minimize"
-              ondblclick="toggleWindow('browser-window')"
+              onclick="toggleWindow('browser-window')"
             ></button>
             <button
               aria-label="Maximize"
-              ondblclick="maximizeWindow('browser-window')"
+              onclick="maximizeWindow('browser-window')"
             ></button>
             <button
               aria-label="Close"
-              ondblclick="toggleWindow('browser-window', `close`)"
+              onclick="toggleWindow('browser-window', `close`)"
             ></button>
           </div>
         </div>
@@ -731,11 +731,11 @@
           <div class="title-bar-controls">
             <button
               aria-label="Minimize"
-              ondblclick="toggleWindow('guestbook-window')"
+              onclick="toggleWindow('guestbook-window')"
             ></button>
             <button
               aria-label="Close"
-              ondblclick="toggleWindow('guestbook-window', 'close')"
+              onclick="toggleWindow('guestbook-window', 'close')"
             ></button>
           </div>
         </div>
@@ -759,35 +759,35 @@
         <div
           class="open-tab"
           id="network-button"
-          ondblclick="toggleWindow('network-window')"
+          onclick="toggleWindow('network-window')"
         >
           <img src="./assets/images/network.avif" alt="network" /> Network
         </div>
         <div
           class="open-tab"
           id="projects-button"
-          ondblclick="toggleWindow('projects-window')"
+          onclick="toggleWindow('projects-window')"
         >
           <img src="./assets/images/documents.avif" alt="documents" /> Projects
         </div>
         <div
           class="open-tab"
           id="cmd-button"
-          ondblclick="toggleWindow('cmd-window')"
+          onclick="toggleWindow('cmd-window')"
         >
           <img src="./assets/images/cmd.avif" alt="cmd" /> CMD
         </div>
         <div
           class="open-tab"
           id="browser-button"
-          ondblclick="toggleWindow('browser-window')"
+          onclick="toggleWindow('browser-window')"
         >
           <img src="./assets/images/ie.avif" alt="ie" /> Internet Explorer
         </div>
         <div
           class="open-tab"
           id="guestbook-button"
-          ondblclick="toggleWindow('guestbook-window')"
+          onclick="toggleWindow('guestbook-window')"
         >
           <img src="./assets/images/guestbook.avif" alt="guestbook" /> Guestbook
         </div>
@@ -806,16 +806,19 @@
 
       function setButtonActive(windowId, isActive) {
         const btnId = windowToButton[windowId];
-        if (!btnId) return;
-        const btn = document.getElementById(btnId);
-        if (!btn) return;
+      if (!btnId) return;
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
 
-        if (isActive) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
+      if (isActive) {
+        btn.style.display = 'flex';     // or 'inline-flex' depending on your CSS
+        btn.classList.add('active');
+      } else {
+         btn.style.display = 'none';     // hide it completely
+        btn.classList.remove('active');
       }
+      }
+
 
       // Toggle show/hide a window
       function toggleWindow(windowId, action) {
@@ -906,8 +909,7 @@
       }
 
       document.addEventListener('DOMContentLoaded', function () {
-        // Init DataTable for the Projects window
-        if (document.querySelector('#projects-table')) {
+      if (document.querySelector('#projects-table')) {
           new DataTable('#projects-table', {
             paging: false,
             info: false,
@@ -917,22 +919,21 @@
             scrollY: '460px',
             scrollCollapse: true,
             scrollX: true,
-            order: [[2, 'desc']], // sort by cosine similarity desc
+            order: [[2, 'desc']],
           });
         }
 
-        // Start with windows closed except Network if you want
-        // toggleWindow('network-window'); // uncomment to open on load
-        setButtonActive('network-window', false);
-        setButtonActive('projects-window', false);
-        setButtonActive('cmd-window', false);
-        setButtonActive('browser-window', false);
-        setButtonActive('guestbook-window', false);
+        // hide all taskbar buttons on load
+        Object.keys(windowToButton).forEach(function (winId) {
+          setButtonActive(winId, false);
+        });
 
         updateClock();
-        setInterval(updateClock, 60000); // update every minute
+        setInterval(updateClock, 60000);
       });
-    </script>
+
+            });
+            </script>
     <audio id="click-sound" src="assets/audio/click.mp3" preload="auto">
     </audio>
   </body>
