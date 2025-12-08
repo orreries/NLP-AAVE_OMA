@@ -915,6 +915,7 @@
       }
 
       // Window dragging
+        // Make windows draggable by their title bar
       function initDragging() {
         let active = null;
         let offsetX = 0;
@@ -922,35 +923,45 @@
         let z = 10;
 
         document.querySelectorAll(".move .title-bar").forEach((bar) => {
-          bar.addEventListener("mousedown", (e) => {
-            const container = bar.closest(".move");
-            if (!container) return;
+        bar.style.cursor = "move"; // little UX bonus
 
-            active = container;
-            z += 1;
-            active.style.zIndex = z;
+        bar.addEventListener("mousedown", (e) => {
+        const container = bar.closest(".move");
+        if (!container) return;
 
-            const rect = active.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
+        active = container;
+        z += 1;
+        active.style.zIndex = z;
 
-            document.addEventListener("mousemove", onMouseMove);
-            document.addEventListener("mouseup", onMouseUp);
-          });
-        });
+        const rect = active.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
 
-        function onMouseMove(e) {
-          if (!active) return;
-          active.style.left = `${e.clientX - offsetX}px`;
-          active.style.top = `${e.clientY - offsetY}px`;
-        }
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+      });
+    });
 
-        function onMouseUp() {
-          document.removeEventListener("mousemove", onMouseMove);
-          document.removeEventListener("mouseup", onMouseUp);
-          active = null;
-        }
+    function onMouseMove(e) {
+      if (!active) return;
+
+      // If mouse button is no longer pressed (e.g. mouseup lost over iframe),
+      // stop dragging.
+      if (e.buttons === 0) {
+        onMouseUp();
+        return;
       }
+
+      active.style.left = `${e.clientX - offsetX}px`;
+      active.style.top = `${e.clientY - offsetY}px`;
+    }
+
+    function onMouseUp() {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      active = null;
+    }
+  }
 
       // Initialize everything
       document.addEventListener("DOMContentLoaded", function () {
