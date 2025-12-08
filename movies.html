@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AAVE & NLP – Movie Results</title>
+
+  <!-- XP theme fonts/background will still show because we style our own body here -->
+  <!-- DataTables CSS (for interactive table styling) -->
+  <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+  <!-- jQuery + DataTables JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #008080; /* XP teal vibe */
+    }
+    .window {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ece9d8;
+      border: 2px solid #000080;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+    }
+    .window-titlebar {
+      background: linear-gradient(to right, #0a246a, #a6caf0);
+      color: white;
+      padding: 0.4rem 0.6rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    .window-body {
+      padding: 1rem;
+      background: #ece9d8;
+    }
+    .window-titlebar-buttons span {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1px solid #000;
+      background: #c0c0c0;
+      margin-left: 4px;
+      text-align: center;
+      line-height: 12px;
+      font-size: 10px;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+    table.dataTable thead th {
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-titlebar">
+      <span>AAVE Movie Analysis – Results</span>
+      <div class="window-titlebar-buttons">
+        <span>_</span><span>□</span><span>X</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <h1>AAVE & Semantic Similarity in Comedy Films</h1>
+      <p>
+        Sort any column by clicking the header, or use the search box to find a movie.
+        Click <strong>Details</strong> to open that film’s full write-up.
+      </p>
+
+      <table id="movies" class="display" style="width:100%">
+        <thead>
+          <tr>
+            <th>Movie</th>
+            <th>Year</th>
+            <th>AAVE Term Count</th>
+            <th>Unique AAVE Terms</th>
+            <th>Semantic Similarity</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Replace these with your real numbers -->
+          <tr>
+            <td>Barbie</td>
+            <td>2023</td>
+            <td>45</td>
+            <td>18</td>
+            <td>0.22</td>
+            <td><a href="barbie.html">View</a></td>
+          </tr>
+          <tr>
+            <td>Bridesmaids</td>
+            <td>2011</td>
+            <td>32</td>
+            <td>15</td>
+            <td>0.21</td>
+            <td><a href="bridesmaids.html">View</a></td>
+          </tr>
+          <tr>
+            <td>Superbad</td>
+            <td>2007</td>
+            <td>61</td>
+            <td>24</td>
+            <td>0.27</td>
+            <td><a href="superbad.html">View</a></td>
+          </tr>
+          <!-- add one <tr> per movie -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Initialize DataTables when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+      new DataTable('#movies');
+    });
+  </script>
+</body>
+</html>
