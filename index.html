@@ -1051,6 +1051,12 @@
           active.style.top = `${newTop}px`;
           } 
 
+        function onMouseUp() {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      active = null;
+    }
+  } // ← THIS WAS MISSING
           
       // Initialize everything
       document.addEventListener("DOMContentLoaded", function () {
