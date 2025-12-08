@@ -915,48 +915,23 @@
     }
 
     // Toggle show/hide a window
-    function toggleWindow(windowId, action) {
-      const win = document.getElementById(windowId);
-      if (!win) return;
-
-      // we drag the .move container, so fix that element's position
-      const container = win.closest(".move") || win;
-
-      if (action === "close") {
-        win.style.display = "none";
-        setButtonActive(windowId, false);
-        return;
-      }
-
-        const isHidden = win.style.display === "none" || win.style.display === "";
-
-        if (isHidden) {
-        // show window
-        win.style.display = "block";
-        setButtonActive(windowId, true);
-
-        // 🔧 ensure it's on-screen when opening
-        const minTop = 40;   // distance from very top of viewport
-        const minLeft = 40;  // distance from very left of viewport
-
-        const rect = container.getBoundingClientRect();
-        let top = rect.top;
-        let left = rect.left;
-
-        if (isNaN(top) || top < minTop || top > window.innerHeight - 80) {
-          container.style.top = minTop + "px";
+      function toggleWindow(windowId, action) {
+        const win = document.getElementById(windowId);
+        if (!win) return;
+        if (action === "close") {
+          win.style.display = "none";
+          setButtonActive(windowId, false);
+          return;
         }
-        if (isNaN(left) || left < -container.offsetWidth + 80 || left > window.innerWidth - 80) {
-          container.style.left = minLeft + "px";
+        const current = win.style.display;
+        if (current === "none" || current === "") {
+          win.style.display = "block";
+          setButtonActive(windowId, true);
+        } else {
+          win.style.display = "none";
+          setButtonActive(windowId, false);
         }
-      } else {
-        // hide window
-        win.style.display = "none";
-        setButtonActive(windowId, false);
       }
-    }
-
-
     // Maximize toggle
     function maximizeWindow(windowId) {
       const win = document.getElementById(windowId);
