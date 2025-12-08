@@ -1043,23 +1043,30 @@
         let newLeft = e.clientX - offsetX;
         let newTop = e.clientY - offsetY;
 
-        // clamp top so title bar never goes above viewport
-        if (newTop < 0) newTop = 0;
+        // don't let the window's top go above 10px
+        const minTop = 10; // small gap from the very top
+        if (newTop < minTop) newTop = minTop;
 
-        // clamp left/right a bit so it can't vanish completely
-        const margin = 40; // how much of the window can hang off-screen
-        const maxLeft = window.innerWidth - active.offsetWidth + margin;
-        const minLeft = -active.offsetWidth + margin;
+        //  LEFT/RIGHT clamps:
+        // keep at least 80px of the window visible horizontally
+        const visibleX = 80; // how many pixels of the window must remain on-screen
+        const winWidth = window.innerWidth;
+        const elemWidth = active.offsetWidth || 600; // fallback if width is 0 for some reason
+
+        const minLeft = -elemWidth + visibleX;       // can drag most of it off to the left
+        const maxLeft = winWidth - visibleX;         // can drag most of it off to the right
+
         if (newLeft < minLeft) newLeft = minLeft;
         if (newLeft > maxLeft) newLeft = maxLeft;
 
-        // clamp bottom so it doesn't go way below the screen
-        const maxTop = window.innerHeight - 80; // 80px to keep it mostly visible above taskbar
-        if (newTop > maxTop) newTop = maxTop;
+        // bottom clamp
+          const maxTop = window.innerHeight - 50; // 80px to keep it mostly visible above taskbar
+          if (newTop > maxTop) newTop = maxTop;
 
         active.style.left = `${newLeft}px`;
         active.style.top = `${newTop}px`;
-  }
+      }
+
 
 
       function onMouseUp() {
