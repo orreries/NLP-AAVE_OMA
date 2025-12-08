@@ -862,4 +862,537 @@
             id="browser-body"
             width="800"
             height="600"
-            src="https://www.youtube.com/embed/hitDQS
+            src="https://www.youtube.com/embed/hitDQSoS624?start=500"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reflections window -->
+    <div class="move" id="guestbook-container">
+      <div
+        class="window"
+        id="guestbook-window"
+        style="width: 806px; height: 624px; display: none"
+      >
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img
+              src="./assets/images/guestbook.avif"
+              style="vertical-align: middle"
+              width="15px"
+              alt="reflections"
+            />
+            Reflections &amp; Findings
+          </div>
+          <div class="title-bar-controls">
+            <button
+              aria-label="Minimize"
+              onclick="toggleWindow('guestbook-window')"
+            ></button>
+            <button
+              aria-label="Close"
+              onclick="toggleWindow('guestbook-window', 'close')"
+            ></button>
+          </div>
+        </div>
+
+        <div
+          class="window-body"
+          id="reflections-body"
+          style="max-height: 560px; overflow: auto; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9rem; line-height: 1.4;"
+        >
+          <!-- Table of Contents -->
+          <nav class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+              <li><a href="#reflection">Reflection</a></li>
+              <li><a href="#semantic-results">Semantic Similarity Results</a></li>
+              <li><a href="#model-behavior">Why the Model Behaves This Way</a></li>
+              <li><a href="#implications">Implications</a></li>
+              <li><a href="#summary">What These Results Demonstrate</a></li>
+            </ul>
+          </nav>
+
+          <section id="reflection">
+            <h2>Reflection</h2>
+            <p>
+              I first applied an n-gram dictionary matching procedure to see if
+              there was a demonstrable amount of AAVE usage in the selected
+              films. Using a cleaned AAVE glossary, each script was evaluated for
+              single-word and multi-word AAVE expressions.
+              <em>Next Friday</em> was used as the control, as it is widely
+              considered Black media. <em>Next Friday</em> contained more
+              identifiable AAVE terms than movies such as
+              <em>Bridesmaids</em>, <em>Superbad</em>, or
+              <em>The Hangover</em>; however, it was still present in non-Black
+              films.
+            </p>
+            <p>
+              This step confirmed that AAVE is used in some scripts written from
+              a non-Black perspective. Still, I was able to reach this conclusion
+              based on my familiarity with AAVE, and it may be more challenging
+              and intensive for less familiar researchers to get the same
+              conclusion.
+            </p>
+          </section>
+
+          <section id="semantic-results">
+            <h3>Semantic Similarity Results (Cosine Similarity)</h3>
+            <p>
+              Across all films, the semantic similarity scores cluster tightly
+              together, regardless of whether the film uses noticeable AAVE
+              features. Some cursory clustering shows:
+            </p>
+
+            <h4>High Similarity Cluster (~0.20–0.23)</h4>
+            <ul>
+              <li><em>Next Friday</em> — 0.2208</li>
+              <li><em>Bridesmaids</em> — 0.2217</li>
+              <li><em>The Hangover</em> — 0.2339</li>
+              <li><em>Superbad</em> — 0.2013</li>
+              <li><em>Hot Tub Time Machine</em> — 0.2040</li>
+            </ul>
+
+            <h4>Mid/Low Similarity Cluster</h4>
+            <ul>
+              <li><em>Pineapple Express</em> — 0.1743</li>
+              <li><em>Ted</em> — 0.1471</li>
+              <li><em>Tropic Thunder</em> — 0.1872</li>
+            </ul>
+
+            <h4>Outlier Low Similarity</h4>
+            <ul>
+              <li>
+                <em>Harold &amp; Kumar Go to White Castle</em> — 0.0892 (least
+                similar overall)
+              </li>
+            </ul>
+
+            <p>
+              What is striking is that the film with the most AAVE lexical
+              content (<em>Next Friday</em>) has nearly the same semantic
+              similarity score as films with comparatively little AAVE usage.
+              This pattern also extends to the mean similarities, max
+              similarities, and similarity distributions. These metrics also
+              remain tightly clustered across all nine films, despite dramatic
+              differences in cultural grounding, dialogue style, register, and
+              character demographics.
+            </p>
+          </section>
+
+          <section id="model-behavior">
+            <h3>Why the Model Behaves This Way</h3>
+
+            <p>The SentenceTransformer MiniLM model primarily encodes:</p>
+            <ul>
+              <li>
+                topical similarity (conflict, relationships, humor, family,
+                drama)
+              </li>
+              <li>emotional tone</li>
+              <li>discourse structure</li>
+            </ul>
+
+            <p>What it does <strong>not</strong> encode well includes:</p>
+            <ul>
+              <li>
+                vernacular features (AAVE syntax, habitual "be," copula absence,
+                negative concord)
+              </li>
+              <li>racialized linguistic identity</li>
+              <li>code-switching</li>
+              <li>cultural context</li>
+              <li>sociolinguistic register</li>
+            </ul>
+
+            <p>
+              As a result, even when AAVE-heavy tweets contain distinctly Black
+              cultural and linguistic markers, the model maps them into a generic
+              "informal comedic dialogue" space that many movies occupy—
+              regardless of cultural specificity.
+            </p>
+
+            <p><strong>Consequently:</strong></p>
+            <ul>
+              <li>
+                <em>Next Friday</em> and <em>Bridesmaids</em> appear almost
+                identical to the model (~0.22 cosine).
+              </li>
+              <li>
+                Films with different racial and cultural grounding
+                (<em>Hot Tub Time Machine</em>, <em>Superbad</em>,
+                <em>The Hangover</em>) still fall in the same cluster.
+              </li>
+              <li>
+                More unusual films (<em>Harold &amp; Kumar</em>,
+                <em>Scott Pilgrim</em>) appear lower only because they diverge in
+                <strong>topic</strong>, not linguistic style.
+              </li>
+            </ul>
+          </section>
+
+          <section id="implications">
+            <h3>
+              Implications: Structural Erasure of AAVE in Machine Learning
+              Models
+            </h3>
+
+            <ol>
+              <li>
+                <strong>AAVE appears invisible in semantic embedding space.</strong>
+                Even when a script contains unmistakable AAVE terms and Black
+                cultural rhetoric, the model collapses those linguistic features
+                into generic English structures.
+              </li>
+              <li>
+                <strong>Topic overrides dialect.</strong> The embeddings capture
+                what is being discussed, not how it is expressed. Movies about
+                interpersonal chaos, family conflict, and humor score similarly—
+                even if the language used is culturally specific.
+              </li>
+              <li>
+                <strong>AAVE is underrepresented in training data.</strong>
+                MiniLM was trained on standard and majority-coded English
+                corpora. As a result, AAVE patterns are treated as statistical
+                noise rather than meaningful signals.
+              </li>
+              <li>
+                <strong
+                  >Dialectal and cultural distinctions collapse into a single
+                  semantic space.</strong
+                >
+                From the model's perspective, all these movies are just "comedy
+                scripts about messy people," regardless of race, culture, or
+                vernacular.
+              </li>
+              <li>
+                <strong>This extends beyond AAVE.</strong> Other minoritized
+                Englishes (Chicano English, Hawaiian Pidgin, Cajun English,
+                Caribbean English, Appalachian English) would similarly be
+                flattened.
+              </li>
+            </ol>
+          </section>
+
+          <section id="summary">
+            <h3>What These Results Demonstrate</h3>
+            <p>
+              General-purpose NLP models can detect thematic similarity across
+              texts but fail to represent or distinguish the linguistic,
+              cultural, and racialized nuances encoded in AAVE. AAVE is
+              "standardized away" when vectorized. Machine learning systems
+              reproduce existing linguistic hierarchies by not accounting for
+              diverse English dialects. Without explicit dialect-aware training
+              corpora, models will continue to erase the linguistic complexities
+              of marginalized communities.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+      <div class="start-button">
+        <img src="./assets/images/logo.avif" alt="start button" /> start
+      </div>
+      <div class="opened-tabs">
+        <div
+          class="open-tab"
+          id="network-button"
+          onclick="toggleWindow('network-window')"
+        >
+          <img src="./assets/images/network.avif" alt="network" /> Network
+        </div>
+        <div
+          class="open-tab"
+          id="projects-button"
+          onclick="toggleWindow('projects-window')"
+        >
+          <img src="./assets/images/documents.avif" alt="documents" /> Projects
+        </div>
+        <div
+          class="open-tab"
+          id="cmd-button"
+          onclick="toggleWindow('cmd-window')"
+        >
+          <img src="./assets/images/cmd.avif" alt="cmd" /> CMD
+        </div>
+        <div
+          class="open-tab"
+          id="browser-button"
+          onclick="toggleWindow('browser-window')"
+        >
+          <img src="./assets/images/ie.avif" alt="ie" /> Internet Explorer
+        </div>
+        <div
+          class="open-tab"
+          id="guestbook-button"
+          onclick="toggleWindow('guestbook-window')"
+        >
+          <img src="./assets/images/guestbook.avif" alt="guestbook" />
+          Reflections
+        </div>
+      </div>
+      <div class="time" id="clock">00:00 PM</div>
+    </div>
+
+    <!-- Core JS -->
+    <script>
+      // Map window ids <-> taskbar button ids
+      const windowToButton = {
+        "network-window": "network-button",
+        "projects-window": "projects-button",
+        "cmd-window": "cmd-button",
+        "browser-window": "browser-button",
+        "guestbook-window": "guestbook-button",
+      };
+
+      function setButtonActive(windowId, isActive) {
+        const btnId = windowToButton[windowId];
+        if (!btnId) return;
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+
+        if (isActive) {
+          btn.style.display = "flex";
+          btn.classList.add("active");
+        } else {
+          btn.style.display = "none";
+          btn.classList.remove("active");
+        }
+      }
+
+      // Toggle show/hide a window
+      function toggleWindow(windowId, action) {
+        const win = document.getElementById(windowId);
+        if (!win) return;
+        if (action === "close") {
+          win.style.display = "none";
+          setButtonActive(windowId, false);
+          return;
+        }
+        const current = win.style.display;
+        if (current === "none" || current === "") {
+          win.style.display = "block";
+          setButtonActive(windowId, true);
+        } else {
+          win.style.display = "none";
+          setButtonActive(windowId, false);
+        }
+      }
+
+      // Maximize toggle
+      function maximizeWindow(windowId) {
+        const win = document.getElementById(windowId);
+        if (!win) return;
+
+        const isMax = win.dataset.maximized === "true";
+
+        if (!isMax) {
+          win.dataset.prevWidth = win.style.width;
+          win.dataset.prevHeight = win.style.height;
+
+          win.style.position = "fixed";
+          win.style.top = "0";
+          win.style.left = "0";
+          win.style.right = "0";
+          win.style.bottom = "40px";
+
+          win.dataset.maximized = "true";
+        } else {
+          win.style.position = "";
+          win.style.top = "";
+          win.style.left = "";
+          win.style.right = "";
+          win.style.bottom = "";
+
+          win.style.width = win.dataset.prevWidth || win.style.width;
+          win.style.height = win.dataset.prevHeight || win.style.height;
+
+          win.dataset.maximized = "false";
+        }
+      }
+
+      // Desktop icon click handler
+      function doubleClick(iconId, target) {
+        const clickSound = document.getElementById("click-sound");
+        if (clickSound) {
+          clickSound.currentTime = 0;
+          clickSound.play().catch(() => {});
+        }
+
+        if (target === "toggle") {
+          const map = {
+            network: "network-window",
+            projects: "projects-window",
+            cmd: "cmd-window",
+            browser: "browser-window",
+            guestbook: "guestbook-window",
+          };
+          const winId = map[iconId];
+          if (winId) toggleWindow(winId);
+        } else if (target) {
+          window.open(target, "_blank");
+        }
+      }
+
+      // XP Clock
+      function updateClock() {
+        const clock = document.getElementById("clock");
+        if (!clock) return;
+
+        const now = new Date();
+        let h = now.getHours();
+        const m = String(now.getMinutes()).padStart(2, "0");
+        const ampm = h >= 12 ? "PM" : "AM";
+        h = ((h + 11) % 12) + 1;
+
+        clock.textContent = `${h}:${m} ${ampm}`;
+      }
+
+      // IMPROVED Window dragging with better boundary enforcement
+      function initDragging() {
+        let active = null;
+        let offsetX = 0;
+        let offsetY = 0;
+        let z = 10;
+
+        document.querySelectorAll(".move .title-bar").forEach((bar) => {
+          bar.style.cursor = "move";
+
+          bar.addEventListener("mousedown", (e) => {
+            const container = bar.closest(".move");
+            if (!container) return;
+
+            active = container;
+            z += 1;
+            active.style.zIndex = z;
+
+            const rect = active.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+          });
+        });
+
+        function onMouseMove(e) {
+          if (!active) return;
+
+          // if button not pressed anymore, stop dragging
+          if (e.buttons === 0) {
+            onMouseUp();
+            return;
+          }
+
+          let newLeft = e.clientX - offsetX;
+          let newTop = e.clientY - offsetY;
+
+          // Get window dimensions
+          const winWidth = window.innerWidth;
+          const winHeight = window.innerHeight;
+          const elemWidth = active.offsetWidth || 400;
+          const elemHeight = active.offsetHeight || 300;
+
+          // Keep at least 100px of the window visible on each side
+          const minVisiblePx = 100;
+
+          // Top boundary - don't let it go above 0
+          if (newTop < 0) newTop = 0;
+
+          // Bottom boundary - keep title bar visible (account for taskbar ~40px)
+          const maxTop = winHeight - 40 - 30; // Leave room for title bar
+          if (newTop > maxTop) newTop = maxTop;
+
+          // Left boundary - keep part of window visible
+          const minLeft = -elemWidth + minVisiblePx;
+          if (newLeft < minLeft) newLeft = minLeft;
+
+          // Right boundary - keep part of window visible
+          const maxLeft = winWidth - minVisiblePx;
+          if (newLeft > maxLeft) newLeft = maxLeft;
+
+          active.style.left = `${newLeft}px`;
+          active.style.top = `${newTop}px`;
+        }
+
+        function onMouseUp() {
+          document.removeEventListener("mousemove", onMouseMove);
+          document.removeEventListener("mouseup", onMouseUp);
+          active = null;
+        }
+      }
+
+      // Initialize everything
+      document.addEventListener("DOMContentLoaded", function () {
+        if (document.querySelector("#projects-table")) {
+          new DataTable("#projects-table", {
+            paging: false,
+            info: false,
+            lengthChange: false,
+            searching: true,
+            ordering: true,
+            scrollY: "460px",
+            scrollCollapse: true,
+            scrollX: true,
+            order: [[2, "desc"]],
+          });
+        }
+
+        Object.keys(windowToButton).forEach((winId) => {
+          setButtonActive(winId, false);
+        });
+
+        updateClock();
+        setInterval(updateClock, 60000);
+
+        initDragging();
+      });
+
+      // Smooth scroll inside the Reflections window
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("reflections-body");
+        if (!container) return;
+
+        const tocLinks = container.querySelectorAll(".toc a");
+
+        tocLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const rawId = this.getAttribute("href");
+            if (!rawId || !rawId.startsWith("#")) return;
+
+            const id = rawId.slice(1);
+            const target = container.querySelector(`#${CSS.escape(id)}`);
+            if (!target) return;
+
+            const containerRect = container.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const currentScroll = container.scrollTop;
+
+            const offset =
+              targetRect.top - containerRect.top + currentScroll - 8;
+
+            container.scrollTo({
+              top: offset,
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+    </script>
+
+    <audio
+      id="click-sound"
+      src="assets/audio/click.mp3"
+      preload="auto"
+    ></audio>
+  </body>
+</html>
