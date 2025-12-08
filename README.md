@@ -4,6 +4,8 @@
 ## Project Description:
 This project analyzes the incorporation of African American Vernacular English (AAVE) into popular scripted media. Using Natural Language Processing (NLP) techniques, this project will utilize a model to assess the semantic similarity between comedy movie scripts and the AAVE Corpus.
 
+_[Project Site](https://orreries.github.io/NLP-AAVE_OMA/)_
+
 ## Rationale Statement:
 This project is being used to interrogate the way that AAVE is assimilated into the wider English lexicon. AAVE terms have been adopted into the wider English vocabulary with many ignorant to the fact that their creation and usage originated in Black communities. Many of the instances AAVE is being used by individuals outside of Black communities it is used improperly and in a manner that is flippant usually in the context of a joke, or being the joke itself. This type of flagrant usage of AAVE has been coined digital blackface. Analyzing how these pieces of media implement AAVE to augment their comedic effect and what picture it creates of Black people and the way they express themselves is the ultimate goal of this project.
 
