@@ -122,9 +122,16 @@
 
       /* Reflections / guestbook window formatting */
       #reflections-body {
-        background-color: #f2f0e6;
-        padding: 16px;
-      }
+          background-color: #f2f0e6;
+          padding: 16px 24px 20px 24px;   /* more breathing room on top/sides */
+          box-sizing: border-box;
+        }
+        
+        /* keep the text from stretching edge-to-edge */
+        #reflections-body section {
+          max-width: 720px;
+          margin: 0 auto 1.5rem auto;
+        }
 
       #reflections-body h2 {
         margin-top: 1.4rem;
@@ -1341,7 +1348,7 @@
         initDragging();
       });
 
-      // Smooth scroll for Reflections table of contents
+      // Smooth scroll inside the Reflections window
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("reflections-body");
   if (!container) return;
@@ -1351,18 +1358,28 @@ document.addEventListener("DOMContentLoaded", function () {
   tocLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
-      const targetId = this.getAttribute("href");
-      const target = container.querySelector(targetId);
+
+      const rawId = this.getAttribute("href");
+      if (!rawId || !rawId.startsWith("#")) return;
+
+      const id = rawId.slice(1);
+      const target = container.querySelector(`#${CSS.escape(id)}`);
       if (!target) return;
 
+      const containerRect = container.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const currentScroll = container.scrollTop;
+
+      const offset =
+        targetRect.top - containerRect.top + currentScroll - 8;
+
       container.scrollTo({
-        top: target.offsetTop - 8, // small offset under the TOC
+        top: offset,
         behavior: "smooth",
       });
     });
   });
 });
-
     </script>
 
     <audio
