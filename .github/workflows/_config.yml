@@ -4,5 +4,11 @@ bundle
 bundle exec jekyll serve  # preview
 bundle exec jekyll build  # build
 
-
 remote_theme: queenkjuul/jekyll-98
+
+# not adding socials
+jekyll-98:
+  social_links:
+    github: false
+    youtube: false
+    twitch: false
