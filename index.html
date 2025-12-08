@@ -845,9 +845,9 @@
     <!-- Reflections window -->
   <div class="move" id="guestbook-container">
   <div
-    class="window"
-    id="guestbook-window"
-    style="width: 806px; height: 624px; display: none"
+      class="window"
+      id="guestbook-window"
+      style="width: 806px; max-height: 624px; display: none"
   >
     <div class="title-bar">
       <div class="title-bar-text">
@@ -872,7 +872,8 @@
     </div>
 
     <!-- IMPORTANT: scrolling happens on window-body, like the original repo -->
-    <div class="window-body" style="height: 560px; overflow: auto;">
+    <div class="window-body"
+         style="max-height: 560px; overflow-y: auto; box-sizing: border-box; padding-top: 12px;"
       <div id="reflections-body">
         <h2>Reflection</h2>
         <p>
