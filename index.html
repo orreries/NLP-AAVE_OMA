@@ -7,111 +7,128 @@
     <link rel="stylesheet" href="https://unpkg.com/xp.css" />
     <link rel="icon" type="image/x-icon" href="assets/images/computer.avif" />
     <title>Oriel's Project</title>
-    <link rel="stylesheet"
-  href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-<style>
-  /* Projects window: overall body */
-  #projects {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
 
-  #projects h3 {
-    margin: 0 0 0.25rem;
-  }
+    <!-- DataTables + jQuery -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 
-  #projects p {
-    margin: 0 0 0.5rem;
-    font-size: 0.85rem;
-  }
+    <style>
+      /* Projects window: overall body */
+      #projects {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
 
-  /* DataTables wrapper spacing */
-  #projects .dataTables_wrapper {
-    margin-top: 0.25rem;
-  }
+      #projects h3 {
+        margin: 0 0 0.25rem;
+      }
 
-  #projects .dataTables_length,
-  #projects .dataTables_info {
-    font-size: 0.75rem;
-  }
+      #projects p {
+        margin: 0 0 0.5rem;
+        font-size: 0.85rem;
+      }
 
-  #projects .dataTables_filter label {
-    font-size: 0.8rem;
-  }
+      /* DataTables wrapper spacing */
+      #projects .dataTables_wrapper {
+        margin-top: 0.25rem;
+      }
 
-  #projects .dataTables_filter input {
-    height: 1.3rem;
-    font-size: 0.8rem;
-  }
+      #projects .dataTables_length,
+      #projects .dataTables_info {
+        font-size: 0.75rem;
+      }
 
-  /* Table look */
-  #projects-table {
-    border-collapse: collapse;
-    font-size: 0.8rem;
-    width: 100%;
-  }
+      #projects .dataTables_filter label {
+        font-size: 0.8rem;
+      }
 
-  #projects-table th,
-  #projects-table td {
-    padding: 4px 6px;
-    border-bottom: 1px solid #ccc;
-    vertical-align: top;
-  }
+      #projects .dataTables_filter input {
+        height: 1.3rem;
+        font-size: 0.8rem;
+      }
 
-  /* Header styling */
-  #projects-table thead th {
-    background: #003399;
-    color: #ffffff;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    white-space: nowrap;
-  }
+      /* Table look */
+      #projects-table {
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        width: 100%;
+      }
 
-  /* Zebra striping */
-  #projects-table tbody tr:nth-child(even) {
-    background-color: #f5f5f5;
-  }
+      #projects-table th,
+      #projects-table td {
+        padding: 4px 6px;
+        border-bottom: 1px solid #ccc;
+        vertical-align: top;
+      }
 
-  /* Numeric columns right-aligned & tight */
-  #projects-table td:nth-child(2),
-  #projects-table td:nth-child(3),
-  #projects-table td:nth-child(4),
-  #projects-table td:nth-child(5),
-  #projects-table td:nth-child(6),
-  #projects-table td:nth-child(7),
-  #projects-table td:nth-child(8) {
-    text-align: right;
-    white-space: nowrap;
-  }
+      /* Header styling */
+      #projects-table thead th {
+        background: #003399;
+        color: #ffffff;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        white-space: nowrap;
+      }
 
-  /* Tweets column: smaller text, wraps nicely */
-  #projects-table td:last-child {
-    width: 40%;
-    font-size: 0.75rem;
-  }
+      /* Zebra striping */
+      #projects-table tbody tr:nth-child(even) {
+        background-color: #f5f5f5;
+      }
 
-  #projects-table td:last-child ol {
-    margin: 0;
-    padding-left: 1.1rem;
-  }
+      /* Numeric columns right-aligned & tight */
+      #projects-table td:nth-child(2),
+      #projects-table td:nth-child(3),
+      #projects-table td:nth-child(4),
+      #projects-table td:nth-child(5),
+      #projects-table td:nth-child(6),
+      #projects-table td:nth-child(7),
+      #projects-table td:nth-child(8) {
+        text-align: right;
+        white-space: nowrap;
+      }
 
+      /* Tweets column: smaller text, wraps nicely */
+      #projects-table td:last-child {
+        width: 40%;
+        font-size: 0.75rem;
+      }
 
-.move {
-  position: absolute;
-}
-</style>
+      #projects-table td:last-child ol {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
 
+      /* Make windows draggable */
+      .move {
+        position: absolute;
+      }
+
+      /* Taskbar tab active state */
+      .open-tab.active {
+        background: #0a64ad;
+        color: #ffffff;
+      }
+
+      /* Hide tabs by default; JS will show them when needed */
+      .open-tab {
+        display: none;
+        align-items: center;
+      }
+    </style>
   </head>
 
   <body>
+    <!-- Desktop icons -->
     <div
       class="icon my-computer"
       id="my-computer"
       onclick="doubleClick('my-computer', 'https://github.com/orreries/NLP-AAVE_OMA')"
->
-
+    >
       <img src="./assets/images/computer.avif" alt="computer icon" />
       <div class="icon-name">My Computer</div>
     </div>
@@ -127,21 +144,21 @@
 
     <div
       class="icon projects"
-      id="projects"
+      id="projects-icon"
       onclick="doubleClick('projects', 'toggle')"
     >
       <img src="./assets/images/documents.avif" alt="Documents icon" />
       <div class="icon-name">Projects</div>
     </div>
 
-    <div class="icon cmd" id="cmd" onclick="doubleClick('cmd', 'toggle')">
+    <div class="icon cmd" id="cmd-icon" onclick="doubleClick('cmd', 'toggle')">
       <img src="./assets/images/cmd.avif" alt="cmd icon" />
       <div class="icon-name">cmd</div>
     </div>
 
     <div
       class="icon ie"
-      id="browser"
+      id="browser-icon"
       onclick="doubleClick('browser', 'toggle')"
     >
       <img src="./assets/images/ie.avif" alt="internet explorer icon" />
@@ -150,15 +167,20 @@
 
     <div
       class="icon ie"
-      id="guestbook"
+      id="guestbook-icon"
       onclick="doubleClick('guestbook', 'toggle')"
     >
       <img src="./assets/images/guestbook.avif" alt="guestbook" />
       <div class="icon-name">Guestbook</div>
     </div>
 
+    <!-- Network window -->
     <div class="move" id="network-container">
-      <div class="window" id="network-window" style="width: 355px">
+      <div
+        class="window"
+        id="network-window"
+        style="width: 355px; display: none"
+      >
         <div class="title-bar">
           <div class="title-bar-text">
             <img
@@ -183,15 +205,27 @@
         <div class="window-body">
           <p id="about">About this project:</p>
           <p>
-            Hi, I'm Oriel and this project is interrogating the usage of AAVE within popular media. It does so using NLP Semantic Similarity techniques.
+            Hi, I'm Oriel and this project is interrogating the usage of AAVE
+            within popular media. It does so using NLP Semantic Similarity
+            techniques.
           </p>
-          <p> 
-            Using Sentence Transformers it implements the 
-            <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2" target="_blank">all-MiniLM-L12-v2 model</a>
-            in to calculate cosine similarity between the comedic movie scripts and a corpus of Black Twitter posts.
-          </p>  
           <p>
-            Check out the notebook for the project <a href="https://colab.research.google.com/drive/1vRxxkNJ3ThOfpQjWfyNcjhG9yLoB99qF?usp=sharing">here</a>.
+            Using Sentence Transformers it implements the
+            <a
+              href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"
+              target="_blank"
+              >all-MiniLM-L12-v2 model</a
+            >
+            to calculate cosine similarity between the comedic movie scripts and
+            a corpus of Black Twitter posts.
+          </p>
+          <p>
+            Check out the notebook for the project
+            <a
+              href="https://colab.research.google.com/drive/1vRxxkNJ3ThOfpQjWfyNcjhG9yLoB99qF?usp=sharing"
+              target="_blank"
+              >here</a
+            >.
           </p>
           <br />
 
@@ -240,6 +274,7 @@
       </div>
     </div>
 
+    <!-- CMD window -->
     <div class="move" id="cmd-container">
       <div class="window" id="cmd-window" style="display: none">
         <div class="title-bar">
@@ -272,8 +307,13 @@
       </div>
     </div>
 
+    <!-- Projects window (table) -->
     <div class="move" id="projects-container">
-        <div class="window" id="projects-window" style="width: 800px; max-width: 95vw; display: none">
+      <div
+        class="window"
+        id="projects-window"
+        style="width: 760px; max-width: 90vw; display: none"
+      >
         <div class="title-bar">
           <div class="title-bar-text">
             <img
@@ -295,382 +335,429 @@
             ></button>
           </div>
         </div>
-        <div class="window-body" id="projects" style="overflow:auto; max-height: 650px;">
-  <h3>AAVE &amp; NLP – Movie Similarity Analysis</h3>
-  <p>
-    Sort columns, search for a movie, or scroll to see the top 5 most similar tweets
-    for each script.
-  </p>
+        <div
+          class="window-body"
+          id="projects"
+          style="overflow: auto; max-height: 650px"
+        >
+          <h3>AAVE &amp; NLP – Movie Similarity Analysis</h3>
+          <p>
+            Sort columns, search for a movie, or scroll to see the top 5 most
+            similar tweets for each script.
+          </p>
 
-  <table id="projects-table" class="display" style="width:100%; background:white;">
-    <thead>
-      <tr>
-        <th>Movie</th>
-        <th>Year</th>
-        <th>Cosine Similarity</th>
-        <th>Mean</th>
-        <th>Max</th>
-        <th>Min</th>
-        <th>Std Dev</th>
-        <th># Tweets</th>
-        <th>Top 5 Most Similar Tweets</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Next Friday (2000) -->
-      <tr>
-        <td>Next Friday</td>
-        <td>2000</td>
-        <td>0.2208</td>
-        <td>0.1268</td>
-        <td>0.3536</td>
-        <td>-0.0911</td>
-        <td>0.0597</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3536</strong> – cops touching on kids again its in the dna
-              shopblack blacktech supportblackbusiness pitchblack black...
-            </li>
-            <li>
-              <strong>0.3226</strong> – heard someone getting their life slapped out of them
-              in target on black friday thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3170</strong> – i aint got time to be black friday shopping
-              you aint got the money either thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3170</strong> – i aint got time to be black friday shopping
-              you aint got the money either thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3042</strong> – when youre talkin slick smokin one on the porch
-              and that cool uncle tries to slide into the convo th...
-            </li>
-          </ol>
-        </td>
-      </tr>
+          <table
+            id="projects-table"
+            class="display"
+            style="width: 100%; background: white"
+          >
+            <thead>
+              <tr>
+                <th>Movie</th>
+                <th>Year</th>
+                <th>Cosine Similarity</th>
+                <th>Mean</th>
+                <th>Max</th>
+                <th>Min</th>
+                <th>Std Dev</th>
+                <th># Tweets</th>
+                <th>Top 5 Most Similar Tweets</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Next Friday (2000) -->
+              <tr>
+                <td>Next Friday</td>
+                <td>2000</td>
+                <td>0.2208</td>
+                <td>0.1268</td>
+                <td>0.3536</td>
+                <td>-0.0911</td>
+                <td>0.0597</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3536</strong> – cops touching on kids again its
+                      in the dna shopblack blacktech supportblackbusiness
+                      pitchblack black...
+                    </li>
+                    <li>
+                      <strong>0.3226</strong> – heard someone getting their life
+                      slapped out of them in target on black friday
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3170</strong> – i aint got time to be black
+                      friday shopping you aint got the money either
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3170</strong> – i aint got time to be black
+                      friday shopping you aint got the money either
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3042</strong> – when youre talkin slick smokin
+                      one on the porch and that cool uncle tries to slide into
+                      the convo th...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Superbad (2007) -->
-      <tr>
-        <td>Superbad</td>
-        <td>2007</td>
-        <td>0.2013</td>
-        <td>0.1156</td>
-        <td>0.3176</td>
-        <td>-0.0867</td>
-        <td>0.0604</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3176</strong> – the throws in a diversity montage nice what yaw got
-              cause yaw getting slammed right about now oscars...
-            </li>
-            <li>
-              <strong>0.3056</strong> – sequels remakes amp oscarssowhite whats the deal hollywood via...
-            </li>
-            <li>
-              <strong>0.3029</strong> – that adhd show presents oscarssowhite adhd adhdshow adhdpodcast
-              adhdshow hollywod...
-            </li>
-            <li>
-              <strong>0.3015</strong> – will watch now but oscarssowhite but i am a fan of amp they under
-              damage control...
-            </li>
-            <li>
-              <strong>0.3001</strong> – thank you for being true to urself amp let oscarssowhite know you
-              can be blk amp talented...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- Superbad (2007) -->
+              <tr>
+                <td>Superbad</td>
+                <td>2007</td>
+                <td>0.2013</td>
+                <td>0.1156</td>
+                <td>0.3176</td>
+                <td>-0.0867</td>
+                <td>0.0604</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3176</strong> – the throws in a diversity
+                      montage nice what yaw got cause yaw getting slammed right
+                      about now oscars...
+                    </li>
+                    <li>
+                      <strong>0.3056</strong> – sequels remakes amp
+                      oscarssowhite whats the deal hollywood via...
+                    </li>
+                    <li>
+                      <strong>0.3029</strong> – that adhd show presents
+                      oscarssowhite adhd adhdshow adhdpodcast adhdshow hollywod...
+                    </li>
+                    <li>
+                      <strong>0.3015</strong> – will watch now but oscarssowhite
+                      but i am a fan of amp they under damage control...
+                    </li>
+                    <li>
+                      <strong>0.3001</strong> – thank you for being true to
+                      urself amp let oscarssowhite know you can be blk amp
+                      talented...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Bridesmaids (2011) -->
-      <tr>
-        <td>Bridesmaids</td>
-        <td>2011</td>
-        <td>0.2217</td>
-        <td>0.1274</td>
-        <td>0.3421</td>
-        <td>-0.0500</td>
-        <td>0.0692</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3421</strong> – the odd couple oscarssowhite...
-            </li>
-            <li>
-              <strong>0.3308</strong> – auntie you still single me you still in and out the abortion clinic
-              thanksgivingclapback woah...
-            </li>
-            <li>
-              <strong>0.3176</strong> – speaking of the oscars wrote a new piece on oscarssowhite for read
-              it here...
-            </li>
-            <li>
-              <strong>0.3149</strong> – aunt you still wearing them fake weaves me you still faking that
-              pregnancy thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3121</strong> – aunt didnt you wear that last year me didnt you wear a wedding ring
-              last year thanksgivingclapback...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- Bridesmaids (2011) -->
+              <tr>
+                <td>Bridesmaids</td>
+                <td>2011</td>
+                <td>0.2217</td>
+                <td>0.1274</td>
+                <td>0.3421</td>
+                <td>-0.0500</td>
+                <td>0.0692</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3421</strong> – the odd couple oscarssowhite...
+                    </li>
+                    <li>
+                      <strong>0.3308</strong> – auntie you still single me you
+                      still in and out the abortion clinic thanksgivingclapback
+                      woah...
+                    </li>
+                    <li>
+                      <strong>0.3176</strong> – speaking of the oscars wrote a
+                      new piece on oscarssowhite for read it here...
+                    </li>
+                    <li>
+                      <strong>0.3149</strong> – aunt you still wearing them fake
+                      weaves me you still faking that pregnancy
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3121</strong> – aunt didnt you wear that last
+                      year me didnt you wear a wedding ring last year
+                      thanksgivingclapback...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- The Hangover (2009) -->
-      <tr>
-        <td>The Hangover</td>
-        <td>2009</td>
-        <td>0.2339</td>
-        <td>0.1344</td>
-        <td>0.3603</td>
-        <td>-0.0857</td>
-        <td>0.0774</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3603</strong> – u look like ure hungover n strugglin me like ur belly n the button
-              to ur jeans thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3272</strong> – thanksgivingclapback latino edition...
-            </li>
-            <li>
-              <strong>0.3151</strong> – its the most wonderful time of the year when i eat leftovers and
-              read thanksgivingclapback quotes...
-            </li>
-            <li>
-              <strong>0.3146</strong> – looking for some giggles look up thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3140</strong> – im laughing so hard reading through thanksgivingclapback...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- The Hangover (2009) -->
+              <tr>
+                <td>The Hangover</td>
+                <td>2009</td>
+                <td>0.2339</td>
+                <td>0.1344</td>
+                <td>0.3603</td>
+                <td>-0.0857</td>
+                <td>0.0774</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3603</strong> – u look like ure hungover n
+                      strugglin me like ur belly n the button to ur jeans
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3272</strong> – thanksgivingclapback latino
+                      edition...
+                    </li>
+                    <li>
+                      <strong>0.3151</strong> – its the most wonderful time of
+                      the year when i eat leftovers and read thanksgivingclapback
+                      quotes...
+                    </li>
+                    <li>
+                      <strong>0.3146</strong> – looking for some giggles look up
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3140</strong> – im laughing so hard reading
+                      through thanksgivingclapback...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Hot Tub Time Machine (2010) -->
-      <tr>
-        <td>Hot Tub Time Machine</td>
-        <td>2010</td>
-        <td>0.2040</td>
-        <td>0.1172</td>
-        <td>0.3534</td>
-        <td>-0.0808</td>
-        <td>0.0714</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3534</strong> – and thats how you hershey hersheypark hersheyparkhappy
-              visithersheyharrisburg blackmoms blackmomsblo...
-            </li>
-            <li>
-              <strong>0.3334</strong> – crazy uncle you have on too much makeup me and you snort up too
-              much cocaine thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3330</strong> – and thats how you hershey hersheypark hersheyparkhappy
-              visithersheyharrisburg blackmoms blackmomsblo...
-            </li>
-            <li>
-              <strong>0.3245</strong> – grandma pick up yo pants me pick up yo titties
-              thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.3093</strong> – mom honey this mac amp cheese kinda dry pops just like ya pussy me
-              slowly dying thanksgivingclapback...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- Hot Tub Time Machine (2010) -->
+              <tr>
+                <td>Hot Tub Time Machine</td>
+                <td>2010</td>
+                <td>0.2040</td>
+                <td>0.1172</td>
+                <td>0.3534</td>
+                <td>-0.0808</td>
+                <td>0.0714</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3534</strong> – and thats how you hershey
+                      hersheypark hersheyparkhappy visithersheyharrisburg
+                      blackmoms blackmomsblo...
+                    </li>
+                    <li>
+                      <strong>0.3334</strong> – crazy uncle you have on too much
+                      makeup me and you snort up too much cocaine
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3330</strong> – and thats how you hershey
+                      hersheypark hersheyparkhappy visithersheyharrisburg
+                      blackmoms blackmomsblo...
+                    </li>
+                    <li>
+                      <strong>0.3245</strong> – grandma pick up yo pants me pick
+                      up yo titties thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.3093</strong> – mom honey this mac amp cheese
+                      kinda dry pops just like ya pussy me slowly dying
+                      thanksgivingclapback...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Harold & Kumar Go to White Castle (2004) -->
-      <tr>
-        <td>Harold &amp; Kumar Go to White Castle</td>
-        <td>2004</td>
-        <td>0.0892</td>
-        <td>0.0512</td>
-        <td>0.3035</td>
-        <td>-0.1327</td>
-        <td>0.0744</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3035</strong> – white hollywood cartoon oscarssowhite oscars hollywood...
-            </li>
-            <li>
-              <strong>0.2975</strong> – and the oscar goes to this white person ltfill in the blankgt
-              oscarssowhite...
-            </li>
-            <li>
-              <strong>0.2704</strong> – hollywood we have a problem great piece on whitewashing by
-              oscarssowhite diversity...
-            </li>
-            <li>
-              <strong>0.2686</strong> – oscars opt for a rather white poster oscarssowhite...
-            </li>
-            <li>
-              <strong>0.2631</strong> – trying to write about oscarnoms but im too blinded but their
-              whiteness ugh oscarssowhite oscars...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- Harold & Kumar Go to White Castle (2004) -->
+              <tr>
+                <td>Harold &amp; Kumar Go to White Castle</td>
+                <td>2004</td>
+                <td>0.0892</td>
+                <td>0.0512</td>
+                <td>0.3035</td>
+                <td>-0.1327</td>
+                <td>0.0744</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3035</strong> – white hollywood cartoon
+                      oscarssowhite oscars hollywood...
+                    </li>
+                    <li>
+                      <strong>0.2975</strong> – and the oscar goes to this white
+                      person ltfill in the blankgt oscarssowhite...
+                    </li>
+                    <li>
+                      <strong>0.2704</strong> – hollywood we have a problem
+                      great piece on whitewashing by oscarssowhite diversity...
+                    </li>
+                    <li>
+                      <strong>0.2686</strong> – oscars opt for a rather white
+                      poster oscarssowhite...
+                    </li>
+                    <li>
+                      <strong>0.2631</strong> – trying to write about oscarnoms
+                      but im too blinded but their whiteness ugh oscarssowhite
+                      oscars...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Scott Pilgrim vs. The World (2010) -->
-      <tr>
-        <td>Scott Pilgrim vs. The World</td>
-        <td>2010</td>
-        <td>0.1146</td>
-        <td>0.0658</td>
-        <td>0.2399</td>
-        <td>-0.1304</td>
-        <td>0.0514</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.2399</strong> – november thanksgiving thanksgivingclapback thanksgivingbreak
-              picoftheday art...
-            </li>
-            <li>
-              <strong>0.2283</strong> – print edition thanksgivingclapback...
-            </li>
-            <li>
-              <strong>0.2218</strong> – with all the controversies over oscarssowhite and selmamovie im
-              realizing what the world really look...
-            </li>
-            <li>
-              <strong>0.2073</strong> – history vs movie via selmamovie blacktwitter oscarssowhite
-              americansniper culture entertainment...
-            </li>
-            <li>
-              <strong>0.2071</strong> – aunt all u do is stay on that spacebook me while ur husband stay on
-              tinder thanksgivingclapback...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- Scott Pilgrim vs. The World (2010) -->
+              <tr>
+                <td>Scott Pilgrim vs. The World</td>
+                <td>2010</td>
+                <td>0.1146</td>
+                <td>0.0658</td>
+                <td>0.2399</td>
+                <td>-0.1304</td>
+                <td>0.0514</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.2399</strong> – november thanksgiving
+                      thanksgivingclapback thanksgivingbreak picoftheday art...
+                    </li>
+                    <li>
+                      <strong>0.2283</strong> – print edition
+                      thanksgivingclapback...
+                    </li>
+                    <li>
+                      <strong>0.2218</strong> – with all the controversies over
+                      oscarssowhite and selmamovie im realizing what the world
+                      really look...
+                    </li>
+                    <li>
+                      <strong>0.2073</strong> – history vs movie via selmamovie
+                      blacktwitter oscarssowhite americansniper culture
+                      entertainment...
+                    </li>
+                    <li>
+                      <strong>0.2071</strong> – aunt all u do is stay on that
+                      spacebook me while ur husband stay on tinder
+                      thanksgivingclapback...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Pineapple Express (2008) -->
-      <tr>
-        <td>Pineapple Express</td>
-        <td>2008</td>
-        <td>0.1743</td>
-        <td>0.1001</td>
-        <td>0.2686</td>
-        <td>-0.0517</td>
-        <td>0.0461</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.2686</strong> – oscarssowhite they dont see color illustration by victoria
-              courtney...
-            </li>
-            <li>
-              <strong>0.2572</strong> – white on white good oscarssowhite graphic by the lat...
-            </li>
-            <li>
-              <strong>0.2468</strong> – hands down best article on oscars american hypermasculine by
-              oscarssowhite oscarssomale...
-            </li>
-            <li>
-              <strong>0.2398</strong> – mom you want white or dark meat everyone looks at me me white my
-              brother u sure you like everything ...
-            </li>
-            <li>
-              <strong>0.2324</strong> – if you dont want another oscarssowhite go watch mcfarland usa also
-              spare parts with and black and wh...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- Pineapple Express (2008) -->
+              <tr>
+                <td>Pineapple Express</td>
+                <td>2008</td>
+                <td>0.1743</td>
+                <td>0.1001</td>
+                <td>0.2686</td>
+                <td>-0.0517</td>
+                <td>0.0461</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.2686</strong> – oscarssowhite they dont see
+                      color illustration by victoria courtney...
+                    </li>
+                    <li>
+                      <strong>0.2572</strong> – white on white good
+                      oscarssowhite graphic by the lat...
+                    </li>
+                    <li>
+                      <strong>0.2468</strong> – hands down best article on
+                      oscars american hypermasculine by oscarssowhite
+                      oscarssomale...
+                    </li>
+                    <li>
+                      <strong>0.2398</strong> – mom you want white or dark meat
+                      everyone looks at me me white my brother u sure you like
+                      everything ...
+                    </li>
+                    <li>
+                      <strong>0.2324</strong> – if you dont want another
+                      oscarssowhite go watch mcfarland usa also spare parts with
+                      and black and wh...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Ted (2012) -->
-      <tr>
-        <td>Ted</td>
-        <td>2012</td>
-        <td>0.1471</td>
-        <td>0.0845</td>
-        <td>0.3340</td>
-        <td>-0.0860</td>
-        <td>0.0523</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3340</strong> – podcast with and oscarssowhite arrow theflash doctorwho
-              goldenglobeawards vancouver...
-            </li>
-            <li>
-              <strong>0.2909</strong> – rob rogers cartoon oscars oscarssowhite...
-            </li>
-            <li>
-              <strong>0.2417</strong> – uncle jimmy im leaving because i heard you were coming me im coming
-              because i heard you were leaving...
-            </li>
-            <li>
-              <strong>0.2340</strong> – conan tells it how it is truth oscarssowhite blizzardof...
-            </li>
-            <li>
-              <strong>0.2196</strong> – that adhd show presents oscarssowhite adhd adhdshow adhdpodcast
-              adhdshow hollywod...
-            </li>
-          </ol>
-        </td>
-      </tr>
+              <!-- Ted (2012) -->
+              <tr>
+                <td>Ted</td>
+                <td>2012</td>
+                <td>0.1471</td>
+                <td>0.0845</td>
+                <td>0.3340</td>
+                <td>-0.0860</td>
+                <td>0.0523</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3340</strong> – podcast with and oscarssowhite
+                      arrow theflash doctorwho goldenglobeawards vancouver...
+                    </li>
+                    <li>
+                      <strong>0.2909</strong> – rob rogers cartoon oscars
+                      oscarssowhite...
+                    </li>
+                    <li>
+                      <strong>0.2417</strong> – uncle jimmy im leaving because i
+                      heard you were coming me im coming because i heard you
+                      were leaving...
+                    </li>
+                    <li>
+                      <strong>0.2340</strong> – conan tells it how it is truth
+                      oscarssowhite blizzardof...
+                    </li>
+                    <li>
+                      <strong>0.2196</strong> – that adhd show presents
+                      oscarssowhite adhd adhdshow adhdpodcast adhdshow
+                      hollywod...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
 
-      <!-- Tropic Thunder (2008) -->
-      <tr>
-        <td>Tropic Thunder</td>
-        <td>2008</td>
-        <td>0.1872</td>
-        <td>0.1076</td>
-        <td>0.3101</td>
-        <td>-0.0604</td>
-        <td>0.0516</td>
-        <td>1523</td>
-        <td>
-          <ol>
-            <li>
-              <strong>0.3101</strong> – selmas ava duvernay amp david oyelowo teaming up for hurricane
-              katrina movie cant wait for oscar to ...
-            </li>
-            <li>
-              <strong>0.2965</strong> – juno turned new england so white that its already a shooin for an
-              oscar next year oscarssowhite bliz...
-            </li>
-            <li>
-              <strong>0.2903</strong> – history vs movie via selmamovie blacktwitter oscarssowhite
-              americansniper culture entertainment...
-            </li>
-            <li>
-              <strong>0.2767</strong> – all this snow and its still not as white as the oscars this year
-              oscarssowhite...
-            </li>
-            <li>
-              <strong>0.2726</strong> – oscarssowhite they named the winter storm juno...
-            </li>
-          </ol>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
+              <!-- Tropic Thunder (2008) -->
+              <tr>
+                <td>Tropic Thunder</td>
+                <td>2008</td>
+                <td>0.1872</td>
+                <td>0.1076</td>
+                <td>0.3101</td>
+                <td>-0.0604</td>
+                <td>0.0516</td>
+                <td>1523</td>
+                <td>
+                  <ol>
+                    <li>
+                      <strong>0.3101</strong> – selmas ava duvernay amp david
+                      oyelowo teaming up for hurricane katrina movie cant wait
+                      for oscar to ...
+                    </li>
+                    <li>
+                      <strong>0.2965</strong> – juno turned new england so white
+                      that its already a shooin for an oscar next year
+                      oscarssowhite bliz...
+                    </li>
+                    <li>
+                      <strong>0.2903</strong> – history vs movie via selmamovie
+                      blacktwitter oscarssowhite americansniper culture
+                      entertainment...
+                    </li>
+                    <li>
+                      <strong>0.2767</strong> – all this snow and its still not
+                      as white as the oscars this year oscarssowhite...
+                    </li>
+                    <li>
+                      <strong>0.2726</strong> – oscarssowhite they named the
+                      winter storm juno...
+                    </li>
+                  </ol>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
+    <!-- Browser window (YouTube) -->
     <div class="move" id="browser-container">
       <div
         class="window"
@@ -698,13 +785,13 @@
             ></button>
             <button
               aria-label="Close"
-              onclick="toggleWindow('browser-window', `close`)"
+              onclick="toggleWindow('browser-window', 'close')"
             ></button>
           </div>
         </div>
         <div class="window-body">
           <iframe
-             id="browser-body"
+            id="browser-body"
             width="800"
             height="600"
             src="https://www.youtube.com/embed/hitDQSoS624?start=500"
@@ -712,11 +799,11 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
-
         </div>
       </div>
     </div>
 
+    <!-- Guestbook window (still original, you can swap to findings later) -->
     <div class="move" id="guestbook-container">
       <div
         class="window"
@@ -746,7 +833,7 @@
         </div>
         <div class="window-body">
           <object
-            id="browser-body"
+            id="guestbook-body"
             type="text/html"
             data="https://theboody.atabook.org"
             width="800px"
@@ -756,6 +843,7 @@
       </div>
     </div>
 
+    <!-- Taskbar -->
     <div class="taskbar">
       <div class="start-button">
         <img src="./assets/images/logo.avif" alt="start button" /> start
@@ -799,8 +887,10 @@
       </div>
       <div class="time" id="clock">00:00 PM</div>
     </div>
+
+    <!-- Core JS -->
     <script>
- // Map window ids <-> taskbar button ids
+      // Map window ids <-> taskbar button ids
       const windowToButton = {
         "network-window": "network-button",
         "projects-window": "projects-button",
@@ -810,10 +900,10 @@
       };
 
       function setButtonActive(windowId, isActive) {
-      const btnId = windowToButton[windowId];
-      if (!btnId) return;
-      const btn = document.getElementById(btnId);
-      if (!btn) return;
+        const btnId = windowToButton[windowId];
+        if (!btnId) return;
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
 
         if (isActive) {
           btn.style.display = "flex";
@@ -837,25 +927,13 @@
 
         const current = win.style.display;
         if (current === "none" || current === "") {
-        // show the window
           win.style.display = "block";
           setButtonActive(windowId, true);
-
-        // make sure it's at least partially on-screen
-        const rect = win.getBoundingClientRect();
-        let top = rect.top;
-        let left = rect.left;
-
-        if (isNaN(top) || top < 0) top = 60; // default 60px from top
-        if (isNaN(left) || left < 0) left = 60; // default from left
-
-        win.style.top = `${top}px`;
-          win.style.left = `${left}px`;
-    }   else {
-        win.style.display = "none";
-        setButtonActive(windowId, false);
-    }
-
+        } else {
+          win.style.display = "none";
+          setButtonActive(windowId, false);
+        }
+      }
 
       // Maximize toggle
       function maximizeWindow(windowId) {
@@ -927,7 +1005,6 @@
       }
 
       // Window dragging
-        // Make windows draggable by their title bar
       function initDragging() {
         let active = null;
         let offsetX = 0;
@@ -935,45 +1012,44 @@
         let z = 10;
 
         document.querySelectorAll(".move .title-bar").forEach((bar) => {
-        bar.style.cursor = "move"; // little UX bonus
+          bar.style.cursor = "move";
 
-        bar.addEventListener("mousedown", (e) => {
-        const container = bar.closest(".move");
-        if (!container) return;
+          bar.addEventListener("mousedown", (e) => {
+            const container = bar.closest(".move");
+            if (!container) return;
 
-        active = container;
-        z += 1;
-        active.style.zIndex = z;
+            active = container;
+            z += 1;
+            active.style.zIndex = z;
 
-        const rect = active.getBoundingClientRect();
-        offsetX = e.clientX - rect.left;
-        offsetY = e.clientY - rect.top;
+            const rect = active.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
 
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", onMouseUp);
-      });
-    });
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+          });
+        });
 
-    function onMouseMove(e) {
-      if (!active) return;
+        function onMouseMove(e) {
+          if (!active) return;
 
-      // If mouse button is no longer pressed (e.g. mouseup lost over iframe),
-      // stop dragging.
-      if (e.buttons === 0) {
-        onMouseUp();
-        return;
+          // if button not pressed anymore, stop dragging
+          if (e.buttons === 0) {
+            onMouseUp();
+            return;
+          }
+
+          active.style.left = `${e.clientX - offsetX}px`;
+          active.style.top = `${e.clientY - offsetY}px`;
+        }
+
+        function onMouseUp() {
+          document.removeEventListener("mousemove", onMouseMove);
+          document.removeEventListener("mouseup", onMouseUp);
+          active = null;
+        }
       }
-
-      active.style.left = `${e.clientX - offsetX}px`;
-      active.style.top = `${e.clientY - offsetY}px`;
-    }
-
-    function onMouseUp() {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
-      active = null;
-    }
-  }
 
       // Initialize everything
       document.addEventListener("DOMContentLoaded", function () {
@@ -992,7 +1068,7 @@
           });
         }
 
-        // Hide all taskbar tabs on load
+        // hide all taskbar tabs on load
         Object.keys(windowToButton).forEach((winId) => {
           setButtonActive(winId, false);
         });
@@ -1005,7 +1081,11 @@
         initDragging();
       });
     </script>
-    <audio id="click-sound" src="assets/audio/click.mp3" preload="auto">
-    </audio>
+
+    <audio
+      id="click-sound"
+      src="assets/audio/click.mp3"
+      preload="auto"
+    ></audio>
   </body>
 </html>
