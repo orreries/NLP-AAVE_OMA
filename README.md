@@ -24,6 +24,9 @@ Future research with this work could be to map the wider flow of AAVE adoption i
 2. AAVE_Dictionary_Cleaned.csv: A CSV file of the AAVE Master List. It contains a column for the specific terms and another column for their definitions.
 3. Comedy Scripts (folder): Each file contains the raw movie script text. The filenames (e.g., Superbad.txt, Bridesmaids.txt) get used as the script titles. The corpus they are from pulled from: https://nlds.soe.ucsc.edu/fc2
 4. black_tweets_joined_clean.csv: Cleaned corpus of tweets from Black Twitter. Tweets from the Twitter API from the AAVE Corpus: https://github.com/jazmiahenry/aave_corpora/tree/main
+5. AAVE_Term_Scraping (1).ipynb: This code was used to scrape the AAVE terms and accompanying definitions from the AAVE glossary website.
+6.  AAVE_json_convert: This snippet of code converts the tweet JSONs to tabular form.
+7.  AAVE-A-Collection-of-AAVE.pdf: AAVE Corpus Dataset Information
 
 ## Citations
 Sidnell, J. (2002). Outline of AAVE grammar. https://cdt.org/wp-content/uploads/2017/11/Outline_of_AAVE_grammar___Jack_Sidnell_2002_1_Afr.pdf
