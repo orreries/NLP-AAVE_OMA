@@ -33,7 +33,7 @@ Filtering out non-alphabetic tokens
 
 This produced a clean text file for every movie, ready for both lexical frequency and embedding analysis.
 
-### _3. Scraping and Structuring the AAVE Dictionary_
+#### _3. Scraping and Structuring the AAVE Dictionary_
 
 Next, I scraped the AAVE Master List by looping through its div blocks that contain `<strong>` (terms) and `<mark>` (definitions). I extracted both terms and definitions, stored them in lists, then combined them into a DataFrame, which I saved as a CSV.
 
