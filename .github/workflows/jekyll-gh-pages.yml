@@ -3,3 +3,6 @@ cd jekyll-98
 bundle
 bundle exec jekyll serve  # preview
 bundle exec jekyll build  # build
+
+
+remote_theme: queenkjuul/jekyll-98
