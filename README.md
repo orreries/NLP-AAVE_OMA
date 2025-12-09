@@ -11,70 +11,51 @@ This project is being used to interrogate the way that AAVE is assimilated into 
 
 The majority of the scripts analyzed were released in the late 2000s to the mid-2010s. During this period, there was a rise in the belief that America had achieved a post-racial society. This idea within the cultural zeitgeist is underscored by the fact that Barack Obama was elected in 2008. A pertinent guiding question when analyzing the racial dynamics during that period is whether the increased visibility and incorporation of Black people in politics and popular media are inherently respectful, or whether incorporation without intention does more harm to public sentiment than good.
 
-# Workflow:
-
+## Workflow:
 This project explores how comedy movie scripts relate semantically to social media usage of the Black community and whether AAVE terms appear in mainstream screenwriting. The workflow has two parallel components: a lexical analysis using an AAVE dictionary and an embedding-based semantic similarity analysis using cosine similarity.
 
 #### _1. Collecting and Preparing the Data_
-
-I started by gathering my two main corpora:
-A folder of ~300 comedy screenplays (IMSDB).
-A JSON collection of tweets grouped by hashtag/topic.
-
-To make the tweet data workable, I loaded each JSON file into pandas and converted them into clean DataFrames. Once I verified they displayed correctly in .head(), I exported each DataFrame to CSV for easier use later.
+I started by gathering my two main corpora: A folder of ~300 comedy screenplays (IMSDB) and a JSON collection of tweets grouped by hashtag/topic. To make the tweet data workable, I loaded each JSON file into pandas and converted them into clean DataFrames. Once I verified they displayed correctly in .head(), I exported each DataFrame to CSV for easier use later.
 
 #### _2. Cleaning and Normalizing Script Text_
-
 Each script went through a preprocessing stage:
-Lowercasing
-Removing character names, scene headers, and all-caps formatting
-Tokenizing the text
-Filtering out non-alphabetic tokens
+- Lowercase conversion
+- Removing character names, scene headers, and all-caps formatting
+- Filtering out non-alphabetic tokens
+- Tokenizing the text
 
 This produced a clean text file for every movie, ready for both lexical frequency and embedding analysis.
 
 #### _3. Scraping and Structuring the AAVE Dictionary_
-
-Next, I scraped the AAVE Master List by looping through its div blocks that contain `<strong>` (terms) and `<mark>` (definitions). I extracted both terms and definitions, stored them in lists, then combined them into a DataFrame, which I saved as a CSV.
-
-This AAVE lexicon forms the basis of my lexical overlap checks.
+Next, I scraped the AAVE Master List by looping through its div blocks that contain `<strong>` (terms) and `<mark>` (definitions). I extracted both terms and definitions, stored them in lists, then combined them into a DataFrame, which I saved as a CSV. This AAVE lexicon forms the basis of my lexical overlap checks.
 
 #### _4. Lexical Frequency + N-gram Analysis_
-
-For each script, I built a frequency dictionary to count how often different terms appear. I also cycled through the script tokens using n-grams to check whether AAVE terms appear directly.
-
-Then I compared the set of AAVE words and the set of unique script tokens. Using Python’s set.intersection(), I quickly identified which AAVE terms appear in each film.
+For each script, I built a frequency dictionary to count how often different terms appear. I also cycled through the script tokens using n-grams to check whether AAVE terms appear directly. Then I compared the set of AAVE words and the set of unique script tokens. Using Python’s set.intersection(), I quickly identified which AAVE terms appear in each film.
 
 #### _5. Embedding Model + Semantic Similarity_
-
 For the semantic side, I embedded both:
-the entire cleaned script
-all tweets in the corpus
+- the entire cleaned script
+- all tweets in the corpus
 
 To capture semantic similarity, I use the sentence_transformers library model “all-MiniLM-L12-v2” to convert each script and tweet into an embedding:
-
-the average tweet embedding
-the cosine similarity between the script and average tweet
-the cosine similarity between the script and each individual tweet
+- the average tweet embedding
+- the cosine similarity between the script and average tweet
+- the cosine similarity between the script and each individual tweet
 
 The three key numpy steps were:
 
-`.reshape(1, -1):` turns a 1D array into a 2D row vector so cosine similarity can run
-`[0][0]:` pulls out the single scalar similarity value
-`[0]` for the per-tweet similarities
+1. `.reshape(1, -1):` turns a 1D array into a 2D row vector so cosine similarity can run
+2. `[0][0]:` pulls out the single scalar similarity value
+3. `[0]` for the per-tweet similarities
 
-This produced:
-An overall script-to-Twitter similarity score
-A distribution of how close individual tweets are
-Max/min/mean similarities to interpret semantic alignment
+This produced an overall script-to-Twitter similarity score, a distribution of how close individual tweets are, and max/min/mean similarities to interpret semantic alignment
 
 #### _6. Interpretation_
-
 Finally, I interpreted the results by comparing the comedy scripts to tweets tagged with culturally specific discourse. When scripts show that there is lower cosine similarity there is minimal lexical AAVE overlap.
 
 
 ## Further Study:
-Future research with this work could be to map the wider flow of AAVE adoption into the popular English lexicon. This work could augment a temporal analysis of when AAVE usage has become more commonly used in media. This project could easily be expanded to cover other types of media (e.g., more genres of film, investigate TV episode scripts, help analyze trends in books). It could also be used as a tool to analyze memes and social trends to see if there is significant AAVE usage and if the context in which it’s used is correct.
+Future research with this work could be to map the wider flow of AAVE adoption into the popular English lexicon. This work could augment a temporal analysis of when AAVE usage has become more commonly used in media. This project could easily be expanded to cover other types of media (e.g., more genres of film, investigate TV episode scripts, help analyze trends in books). It could also be used as a tool to analyze memes and social trends to see if there is significant AAVE usage and if the context in which it’s used is correct. It was also suggested that one could use transcripts of spoken AAVE (like podcasts) to build a comprehensive authentic usage AAVE corpus and that would be very compelling further research.
 
 ## Files List:
 1. AAVE_SEMSIM-Final.ipynb: This notebook contains the full workflow for loading movie scripts, cleaning text, embedding scripts and tweets, and computing cosine similarity.
