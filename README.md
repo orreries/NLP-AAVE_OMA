@@ -1,5 +1,5 @@
 # AAVE Usage in Popular Media
-#### [Link to Colab notebook](https://github.com/bitboody/bitboody.github.io)
+#### [Link to Colab notebook](https://colab.research.google.com/drive/1vRxxkNJ3ThOfpQjWfyNcjhG9yLoB99qF?usp=sharing)
 
 ## Project Description:
 This project analyzes the incorporation of African American Vernacular English (AAVE) into popular scripted media. Using Natural Language Processing (NLP) techniques, this project will utilize a model to assess the semantic similarity between comedy movie scripts and the AAVE Corpus.
