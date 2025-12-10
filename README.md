@@ -15,7 +15,7 @@ The majority of the scripts analyzed were released in the late 2000s to the mid-
 This project explores how comedy movie scripts relate semantically to social media usage of the Black community and whether AAVE terms appear in mainstream screenwriting. The workflow centers on an embedding-based semantic similarity analysis using cosine similarity.
 
 #### _1. Collecting and Preparing the Data_
-I started by gathering my two main corpora: a 10 movie subcorpora of a folder of ~300 comedy screenplays (IMSDB) and a JSON collection of tweets grouped by hashtag/topic. For tweets, I loaded each JSON file into pandas, converted it to a clean DataFrame, checked .head(), and exported each to CSV for later use.
+I started by gathering my two main corpora: a 10 movie subcorporus of a folder of ~300 comedy screenplays (IMSDB) and a JSON collection of tweets grouped by hashtag/topic. For tweets, I loaded each JSON file into pandas, converted it to a clean DataFrame, checked .head(), and exported each to CSV for later use.
 
 #### _2. Cleaning and Normalizing Script Text_
 Each script went through a preprocessing stage:
