@@ -1404,9 +1404,43 @@ C:\WINDOWS\SYSTEM32> have a great end to the semester!!!</pre>
           <h3>What These Results Demonstrate</h3>
           <p>General-purpose NLP models can detect thematic similarity across texts but fail to represent or distinguish the linguistic, cultural, and racialized nuances encoded in AAVE. Machine learning systems reproduce existing linguistic hierarchies by not accounting for diverse English dialects.</p>
           
-          <h2>Additional Analysis: Lexical Density</h2>
-          <p>In traditional linguistics, lexical density measures the proportion of specific words relative to all words. In this context, I adapt the concept to quantify how densely a script uses AAVE vocabulary.</p>
+          <h2>Lexical Density Analysis</h2>
+          <h4><em>Note: This part did not work out well based on the way the AAVE terms were tokenized. This is a good basis for future research</em></h4>
+
+          <h3>Overview</h3>
+          <p>
+            In traditional linguistics, lexical density measures the proportion of specific words relative to all words. To evaluate the presence and distribution of AAVE within each film script, I conducted a lexical matching analysis using the curated AAVE dictionary.
+          </p>
+          <p>
+            This process produces a record of each AAVE term appearing in a script, the number of times it occurs, and the proportion of the overall text that contains AAVE vocabulary. These values become the basis for calculating multiple forms of lexical density specific to AAVE usage.
+          </p>
+
           <h3>Token-Based Lexical Density</h3>
+          <p>
+            In this context, I adapt the concept of lexical density to quantify how densely a script uses AAVE vocabulary. Token-based AAVE lexical density measures the frequency of AAVE terms relative to the total number of tokens in the script. The formula is:
+          </p>
+          <p style="text-align: center; font-style: italic; margin: 1rem 0;">
+            Token Density = Total AAVE Terms / Total Tokens in Script
+          </p>
+          <p>
+            This metric captures the intensity of AAVE usage: how often characters in a script draw from AAVE lexicons in their dialogue, narration, or descriptive text. Higher token density indicates more frequent use of AAVE, while lower values suggest that AAVE appears sparsely or only in isolated moments.
+          </p>
+
+          <h3>Type-Based Lexical Density</h3>
+          <p>
+            In addition to frequency, I calculate a type-based AAVE lexical density, which measures the diversity of AAVE vocabulary in the script. Instead of counting every instance of a term, type-based density counts each AAVE term only once, regardless of how many times it appears. The formula is:
+          </p>
+          <p style="text-align: center; font-style: italic; margin: 1rem 0;">
+            Type Density = Unique AAVE Terms / Total Tokens in Script
+          </p>
+          <p>
+            This metric highlights variety rather than repetition. For example, a script that uses one AAVE term many times will have high token density but low type density; conversely, a script that uses a broader set of distinct AAVE terms will show higher type density even if each appears infrequently.
+          </p>
+
+          <h3>How to Interpret Results</h3>
+          <p>
+            Taken together, token-based and type-based lexical densities allow for a more nuanced understanding of how AAVE functions within each film. Token density reflects how often AAVE is used, while type density reflects how richly or diversely it is represented.
+          </p>
         </div>
       </div>
     </div>
