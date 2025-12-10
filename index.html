@@ -1378,33 +1378,95 @@ C:\WINDOWS\SYSTEM32> have a great end to the semester!!!</pre>
       <div class="window-body">
         <div id="reflections-body">
           <h2>Reflection</h2>
-          <p>I first applied an n-gram dictionary matching procedure to see if there was a demonstrable amount of AAVE usage in the selected films. Using a cleaned AAVE glossary, each script was evaluated for single-word and multi-word AAVE expressions.</p>
-          
-          <h3>Semantic Similarity Results (Cosine Similarity)</h3>
-          <p>Across all films, the semantic similarity scores cluster tightly together, regardless of whether the film uses noticeable AAVE features.</p>
-
-          <h4>High Similarity Cluster (~0.20–0.23)</h4>
-          <ul>
-            <li><em>Next Friday</em> – 0.2208</li>
-            <li><em>Bridesmaids</em> – 0.2217</li>
-            <li><em>The Hangover</em> – 0.2339</li>
-            <li><em>Superbad</em> – 0.2013</li>
-          </ul>
-
-          <h3>Why the Model Behaves This Way</h3>
-          <p>The SentenceTransformer MiniLM model primarily encodes topical similarity, emotional tone, and discourse structure. What it does <strong>not</strong> encode well includes vernacular features, racialized linguistic identity, code-switching, cultural context, and sociolinguistic register.</p>
-
-          <h3>Implications: Structural Erasure of AAVE in Machine Learning Models</h3>
-          <ol>
-            <li><strong>AAVE appears invisible in semantic embedding space.</strong> Even when a script contains unmistakable AAVE terms and Black cultural rhetoric, the model collapses those linguistic features into generic English structures.</li>
-            <li><strong>Topic overrides dialect.</strong> The embeddings capture what is being discussed, not how it is expressed.</li>
-            <li><strong>AAVE is underrepresented in training data.</strong> MiniLM was trained on standard and majority-coded English corpora.</li>
-          </ol>
-
-          <h3>What These Results Demonstrate</h3>
-          <p>General-purpose NLP models can detect thematic similarity across texts but fail to represent or distinguish the linguistic, cultural, and racialized nuances encoded in AAVE. Machine learning systems reproduce existing linguistic hierarchies by not accounting for diverse English dialects.</p>
-          
-          <h2>Lexical Density Analysis</h2>
+            <h3><em>Initialization</em></h3>
+            <p>
+              To evaluate how AAVE appears across different comedic films, I first applied an n-gram dictionary matching procedure. Using a cleaned AAVE glossary, I scanned each script for single-word and multi-word AAVE expressions. Next Friday was used as the control as it is widely considered Black media. Next Friday contained more identifiable AAVE terms than movies such as Bridesmaids, Superbad, or The Hangover, however it was still present in non-Black films. This step confirmed that AAVE usage is present within some of the scripts written from a non-Black perspective, but I was able to ascertain this from my familiarity with AAVE and it may be more challenging and intensive for less familiar researchers to come up with the same conclusion.
+            </p>
+            <h3><em>Semantic Similarity Results (Cosine Similarity)</em></h3>
+            <p>
+              Across all films, the semantic similarity scores cluster tightly together, regardless of whether the film uses noticeable AAVE features. Some cursory clustering shows:
+            </p>
+            
+            <h4>Highest Similarity Cluster: ~0.20–0.23</h4>
+            <ul>
+              <li>Next Friday — 0.2208</li>
+              <li>Bridesmaids — 0.2217</li>
+              <li>The Hangover — 0.2339</li>
+              <li>Superbad — 0.2013</li>
+              <li>Hot Tub Time Machine — 0.2040</li>
+            </ul>
+            
+            <h4>Mid Similarity Cluster</h4>
+            <ul>
+              <li>Pineapple Express — 0.1743</li>
+              <li>Ted — 0.1471</li>
+              <li>Tropic Thunder — 0.1872</li>
+            </ul>
+            
+            <h4>Outlier Low Similarity</h4>
+            <ul>
+              <li>Harold & Kumar Go to White Castle — 0.0892 (least similar overall)</li>
+            </ul>
+            
+            <p>
+              What is striking is that the film with the most AAVE lexical content <em>(Next Friday)</em> has nearly the same semantic similarity score as films with comparatively little AAVE usage. This pattern also extends to the mean similarities, max similarities, and similarity distributions. These metrics also remain tightly clustered across all nine films, despite dramatic differences in cultural grounding, dialogue style, register, and character demographics.
+            </p>
+            
+            <p>
+              SentenceTransformer MiniLM is an English-based model that primarily encodes:
+            </p>
+            <ul>
+              <li>topic similarity (themes like conflict, relationships, humor, family, drama)</li>
+              <li>emotional tone</li>
+              <li>discourse structure</li>
+            </ul>
+            
+            <p>What it does not encode well is:</p>
+            <ul>
+              <li>vernacular features (e.g., negative concord, habitual "be,")</li>
+              <li>Racialized linguistic identity</li>
+              <li>Code-switching</li>
+              <li>Cultural context</li>
+            </ul>
+            
+            <p>
+              So even when AAVE-heavy tweets contain distinctly Black cultural and linguistic markers, the model maps them into a generic informal comedic dialogue vector space that many movies also occupy without respect to cultural contexts.
+            </p>
+            
+            <p>
+              Consequently, <em>Next Friday</em> and <em>Bridesmaids</em> look almost the same to the model (≈0.22 cosine). Even movies with completely different racial and cultural grounding (<em>Hot Tub Time Machine, Superbad, The Hangover</em>) score within the same range. Movies with unusual genre structures (<em>Harold & Kumar, Scott Pilgrim</em>) only appear lower because they diverge in topic, not linguistic style.
+            </p>
+            
+            <h3><em>Implications: Structural Erasure of AAVE in Machine Learning Models</em></h3>
+            <p>These findings reveal an issue in NLP systems:</p>
+            
+            <ol>
+              <li>
+                <strong>AAVE appears invisible in semantic embedding space:</strong>
+                Even when a script contains unmistakable AAVE terms and Black cultural rhetoric, the model collapses those linguistic features into generic English structures.
+              </li>
+              <li>
+                <strong>Topic overrides dialect:</strong>
+                The embeddings pick up on what is being talked about, not how it is being expressed. So movies about interpersonal chaos, family conflict, and humor score similarly, even if the language used is culturally specific.
+              </li>
+              <li>
+                <strong>AAVE is underrepresented in training data:</strong>
+                MiniLM was trained on the English corpora that is deemed the societal standard. As a result, AAVE patterns are treated as statistical noise, not meaningful signals.
+              </li>
+              <li>
+                <strong>Dialectal and cultural distinctions collapse into a single semantic space:</strong>
+                From the model's perspective, all these movies are just "comedy scripts about messy people," regardless of race, culture, or vernacular.
+              </li>
+              <li>
+                <strong>This extends beyond AAVE:</strong>
+                Other minoritized Englishes (Chicano English, Hawaiian Pidgin, Cajun English, Caribbean English, Appalachian English) would similarly be flattened.
+              </li>
+            </ol>
+            
+            <h3><em>Conclusion</em></h3>
+            <p>
+              These results demonstrate that general-purpose NLP models can detect thematic similarity across texts but fail to represent or distinguish the linguistic, cultural, and racialized nuances encoded in AAVE. Semantic similarity models cannot be used to evaluate dialectal overlap without additional linguistic scaffolding. AAVE is effectively "standardized away" when mapped into embedding space. Machine learning systems reproduce existing linguistic hierarchies by privileging majority speech patterns. Without explicit dialect-aware training corpora, models will continue to erase the linguistic richness of marginalized communities.
+            </p>          <h2>Lexical Density Analysis</h2>
           <h4><em>Note: This part did not work out well based on the way the AAVE terms were tokenized. This is a good basis for future research</em></h4>
 
           <h3>Overview</h3>
