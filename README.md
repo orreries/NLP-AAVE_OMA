@@ -1,5 +1,5 @@
 # AAVE Usage in Popular Media
-#### [Link to Colab notebook](https://drive.google.com/file/d/19QjbeRbNjIzvdSxN3T6RxeNci-hvA-5I/view?usp=sharing)
+#### [Link to Colab notebook](https://colab.research.google.com/drive/16Ilqg3L3DdGvmgkaE_33xcAJ0DF6qI1B?usp=sharing)
 
 ## Project Description:
 This project aims to systematically analyze how African American Vernacular English (AAVE) is incorporated into popular scripted media. The primary goal is to assess both the frequency and context of AAVE's use by comparing comedy movie scripts to the AAVE Corpus using Natural Language Processing (NLP) techniques. By evaluating the semantic similarity between these scripts and authentic AAVE language as used in social media, the project seeks to determine whether such incorporations reflect meaningful engagement with AAVE or merely surface-level appropriation.
