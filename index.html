@@ -1,176 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/xp.css" />
-    <link rel="icon" type="image/x-icon" href="assets/images/computer.avif" />
-    <title>Oriel's Project</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/xp.css" />
+  <title>Oriel's Project</title>
 
-    <!-- DataTables + jQuery -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css"
-    />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <!-- DataTables + jQuery -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 
-    <style>
-      /* Projects window: overall body */
-      #projects {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-      }
-
-      #projects h3 {
-        margin: 0 0 0.25rem;
-      }
-
-      #projects p {
-        margin: 0 0 0.5rem;
-        font-size: 0.85rem;
-      }
-
-      /* DataTables wrapper spacing */
-      #projects .dataTables_wrapper {
-        margin-top: 0.25rem;
-      }
-
-      #projects .dataTables_length,
-      #projects .dataTables_info {
-        font-size: 0.75rem;
-      }
-
-      #projects .dataTables_filter label {
-        font-size: 0.8rem;
-      }
-
-      #projects .dataTables_filter input {
-        height: 1.3rem;
-        font-size: 0.8rem;
-      }
-
-      /* Table look */
-      #projects-table {
-        border-collapse: collapse;
-        font-size: 0.8rem;
-        width: 100%;
-      }
-
-      #projects-table th,
-      #projects-table td {
-        padding: 4px 6px;
-        border-bottom: 1px solid #ccc;
-        vertical-align: top;
-      }
-
-      /* Header styling */
-      #projects-table thead th {
-        background: #003399;
-        color: #ffffff;
-        position: sticky;
-        top: 0;
-        z-index: 2;
-        white-space: nowrap;
-      }
-
-      /* Zebra striping */
-      #projects-table tbody tr:nth-child(even) {
-        background-color: #f5f5f5;
-      }
-
-      /* Numeric columns right-aligned & tight */
-      #projects-table td:nth-child(2),
-      #projects-table td:nth-child(3),
-      #projects-table td:nth-child(4),
-      #projects-table td:nth-child(5),
-      #projects-table td:nth-child(6),
-      #projects-table td:nth-child(7),
-      #projects-table td:nth-child(8) {
-        text-align: right;
-        white-space: nowrap;
-      }
-
-      /* Tweets column: smaller text, wraps nicely */
-      #projects-table td:last-child {
-        width: 40%;
-        font-size: 0.75rem;
-      }
-
-      #projects-table td:last-child ol {
-        margin: 0;
-        padding-left: 1.1rem;
-      }
-
-      /* Make windows draggable */
-      .move {
-        position: absolute;
-      }
-
-      /* Taskbar tab active state */
-      .open-tab.active {
-        background: #0a64ad;
-        color: #ffffff;
-      }
-
-      /* Hide tabs by default; JS will show them when needed */
-      .open-tab {
-        display: none;
-        align-items: center;
-      }
-
-      /* Reflections / guestbook window formatting */
-      #reflections-body {
-        background-color: #f2f0e6;
-        padding: 20px 28px;
-        box-sizing: border-box;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-        font-size: 0.9rem;
-        line-height: 1.4;
-      }
-
-      #reflections-body h2 {
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-        font-size: 1.4rem;
-      }
-
-      #reflections-body h3 {
-        margin-top: 1.2rem;
-        margin-bottom: 0.4rem;
-        font-size: 1.15rem;
-      }
-
-      #reflections-body h4 {
-        margin-top: 1rem;
-        margin-bottom: 0.3rem;
-        font-size: 1rem;
-      }
-
-      #reflections-body p {
-        margin-bottom: 0.8rem;
-      }
-
-      #reflections-body ul,
-      #reflections-body ol {
-        margin-left: 1.4rem;
-        margin-bottom: 0.8rem;
-      } 
-      #guestbook-window .window-body {
-        display: block !important;
-        justify-content: flex-start !important;
-        align-items: stretch !important;
-        overflow-y: auto !important;
-        height: 560px;  /* or just remove max-height entirely */
+  <style>
+    /* Define Color Variables */
+    :root {
+      --white-color: #ffffff;
+      --primary-blue: #245edc;
+      --primary-dark-blue: #1941a5;
+      --secondary-blue: #3f8cf3;
+      --tab-bg-color: #4892f7;
+      --border-color: #306fd9;
+      --button-bg-start: #5eac56;
+      --button-bg-end: #3c873c;
+      --highlight-color: #1290e9;
+      --text-shadow-color: #222;
+      --drop-shadow-color: rgba(0, 0, 0, 0);
+      --light-blue: #99d1ff00;
     }
 
-    </style>
-  </head>
+    /* Global Styles */
+    * {
+      font-family: "Tahoma", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      outline: none;
+      user-select: none;
+    }
 
-  <body>
-    <!-- Desktop icons -->
+    body {
+      overflow: hidden !important;
+      background-color: #ece9d8;
+      min-height: 100px;
+      background: linear-gradient(180deg, #5a9fd4 0%, #4a9fd4 40%, #7ec143 80%);
+      background-size: cover;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      min-height: 100%;
+    }
+
+    /* Icon Styles */
+    .icon {
+      color: var(--white-color);
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      margin: 8px 0;
+      padding: 2px;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: var(--light-blue);
+      border-color: var(--light-blue);
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .icon img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 5px;
+      pointer-events: none;
+    }
+
+    .icon-name {
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* Positioning Classes */
+    .move {
+      position: absolute;
+    }
+
+    #cmd-container {
+      position: absolute;
+      left: 22%;
+      top: 62%;
+      transform: translate(-22%, -62%);
+    }
+
+    #network-container {
+      position: absolute;
+      left: 33%;
+      top: 24%;
+      transform: translate(-33%, -24%);
+    }
+
+    #projects-container {
+      position: absolute;
+      left: 63%;
+      top: 60%;
+      transform: translate(-63%, -60%);
+    }
+
+    #browser-container,
+    #guestbook-container {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Network Container Styles */
+    #network-container .window-body {
+      padding: 0 20px;
+    }
+
+    #network-container .window-body #activity-div {
+      font-weight: 600;
+      margin: auto;
+      text-align: center;
+    }
+
+    #network-container #about {
+      font-weight: 700;
+    }
+
+    #network-container .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Browser and Guestbook Container Styles */
+    #browser-container .window-body,
+    #guestbook-container .window-body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Taskbar Styles */
+    .taskbar {
+      background-color: var(--primary-blue);
+      background: linear-gradient(
+        to bottom,
+        var(--primary-blue) 0%,
+        var(--secondary-blue) 9%,
+        var(--primary-blue) 18%,
+        var(--primary-blue) 92%,
+        var(--primary-dark-blue) 100%
+      );
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 32px;
+      z-index: 1000;
+    }
+
+    .start-button {
+      color: var(--white-color);
+      height: 100%;
+      float: left;
+      font-size: 22px;
+      line-height: 22px;
+      font-weight: bold;
+      font-style: italic;
+      background: radial-gradient(circle, var(--button-bg-start) 0%, var(--button-bg-end) 100%);
+      box-shadow: 0px 5px 10px #79ce71 inset, 4px 0 8px var(--secondary-blue);
+      padding: 2px 25px 6px 10px;
+      text-shadow: 1px 1px 3px var(--text-shadow-color);
+      border-radius: 0px 8px 8px 0px;
+      margin-right: 16px;
+      cursor: pointer;
+    }
+
+    .start-button img {
+      height: 20px;
+      filter: drop-shadow(1px 1px 1px var(--text-shadow-color));
+      transform: translateY(4px);
+    }
+
+    .opened-tabs {
+      width: calc(100% - 225px);
+      float: left;
+    }
+
+    .open-tab {
+      color: var(--white-color);
+      width: 150px;
+      height: 26px;
+      margin: 3px 0;
+      float: left;
+      background-color: var(--tab-bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 2px;
+      font-family: Calibri, sans-serif;
+      font-size: 14px;
+      line-height: 14px;
+      padding: 8px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      display: none;
+    }
+
+    .open-tab.active {
+      background: #0a64ad;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+    }
+
+    .open-tab img {
+      height: 18px;
+      float: left;
+      transform: translateY(-3px);
+      margin-right: 5px;
+    }
+
+    .time {
+      color: var(--white-color);
+      height: 100%;
+      float: right;
+      font-size: 14px;
+      line-height: 13px;
+      background: linear-gradient(
+        to bottom,
+        var(--highlight-color) 0%,
+        #19b9f3 9%,
+        var(--highlight-color) 18%,
+        var(--highlight-color) 92%,
+        var(--primary-dark-blue) 100%
+      );
+      box-shadow: 0px 5px 10px #14a5f0 inset, 0px 5px 10px #333333;
+      padding: 9px 15px 9px 25px;
+      border-left: 1px solid #092e51;
+      text-shadow: 1px 1px 2px var(--text-shadow-color);
+      cursor: pointer;
+      text-transform: uppercase;
+      position: fixed;
+      right: 0;
+    }
+
+    /* Projects window styles */
+    #projects {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    #projects h3 {
+      margin: 0 0 0.25rem;
+    }
+
+    #projects p {
+      margin: 0 0 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    #projects .dataTables_wrapper {
+      margin-top: 0.25rem;
+    }
+
+    #projects-table {
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      width: 100%;
+    }
+
+    #projects-table th,
+    #projects-table td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #ccc;
+      vertical-align: top;
+    }
+
+    #projects-table thead th {
+      background: #003399;
+      color: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    #projects-table tbody tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+
+    /* Reflections window - FIXED spacing */
+    #guestbook-window .window-body {
+      display: block !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      overflow-y: auto !important;
+      max-height: 560px;
+    }
+
+    #reflections-body {
+      background-color: #f2f0e6;
+      padding: 16px 28px 20px 28px;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    #reflections-body h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    #reflections-body h3 {
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+      font-size: 1.15rem;
+    }
+
+    #reflections-body h4 {
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+
+    #reflections-body p {
+      margin-bottom: 0.8rem;
+    }
+
+    #reflections-body ul,
+    #reflections-body ol {
+      margin-left: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    #lexical-body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.9rem;
+    }
+
+    #lexical-body menu {
+      margin-bottom: 10px;
+    }
+
+    .lexical-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .lexical-table th,
+    .lexical-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .lexical-table th {
+      background: #003399;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .lexical-table tbody tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+
+    .lexical-table tbody tr:hover {
+      background-color: #e8e8e8;
+    }
+
+    .movie-detail {
+      margin-bottom: 15px;
+    }
+
+    .movie-detail h3 {
+      margin: 10px 0 5px 0;
+      color: #003399;
+    }
+
+    .movie-detail p {
+      margin: 5px 0;
+      line-height: 1.5;
+    }
+
+    .top-terms {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-left: 3px solid #003399;
+    }
+
+    .top-terms h4 {
+      margin-top: 0;
+      color: #003399;
+    }
+
+    .top-terms ol {
+      margin: 5px 0;
+      padding-left: 25px;
+    }
+
+    .top-terms li {
+      margin: 3px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Desktop icons -->
     <div
       class="icon my-computer"
       id="my-computer"
@@ -195,9 +448,18 @@
       onclick="doubleClick('projects', 'toggle')"
     >
       <img src="./assets/images/documents.avif" alt="Documents icon" />
-      <div class="icon-name">Projects</div>
+      <div class="icon-name">Semantic Similarity</div>
     </div>
 
+    <div
+      class="icon lexical"
+      id="lexical"
+      onclick="doubleClick('lexical', 'toggle')"  
+    >
+      <img src="./assets/images/documents.avif" alt="Lexical Analysis icon" />
+      <div class="icon-name">Lexical Analysis</div>  
+    </div>
+    
     <div class="icon cmd" id="cmd-icon" onclick="doubleClick('cmd', 'toggle')">
       <img src="./assets/images/cmd.avif" alt="cmd icon" />
       <div class="icon-name">cmd</div>
@@ -320,80 +582,39 @@
         </div>
       </div>
     </div>
-
-    <!-- CMD window -->
-    <div class="move" id="cmd-container">
-      <div class="window" id="cmd-window" style="display: none">
-        <div class="title-bar">
-          <div class="title-bar-text">
-            <img
-              src="./assets/images/cmd.avif"
-              style="vertical-align: middle"
-              width="15px"
-              alt="cmd"
-            />
-            Command Prompt
-          </div>
-          <div class="title-bar-controls">
-            <button
-              aria-label="Minimize"
-              onclick="toggleWindow('cmd-window')"
-            ></button>
-            <button
-              aria-label="Close"
-              onclick="toggleWindow('cmd-window', 'close')"
-            ></button>
-          </div>
-        </div>
-        <div class="window-body">
-          <pre>Microsoft&#10094;R&#10095; Windows DOS 
-&#10094;C&#10095; Copyright Microsoft Corp 1990-2001.
-      <br>C:&#92;WINDOWS&#92;SYSTEM32> have a great end to the semester!!!
-    </pre>
+  <!-- CMD window -->
+  <div class="move" id="cmd-container">
+    <div class="window" id="cmd-window" style="display: none">
+      <div class="title-bar">
+        <div class="title-bar-text">Command Prompt</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize" onclick="toggleWindow('cmd-window')"></button>
+          <button aria-label="Close" onclick="toggleWindow('cmd-window', 'close')"></button>
         </div>
       </div>
+      <div class="window-body">
+        <pre>Microsoft Windows DOS
+Copyright Microsoft Corp 1990-2001.
+
+C:\WINDOWS\SYSTEM32> have a great end to the semester!!!</pre>
+      </div>
     </div>
+  </div>
 
-    <!-- Projects window (table) -->
-    <div class="move" id="projects-container">
-      <div
-        class="window"
-        id="projects-window"
-        style="width: 760px; max-width: 90vw; display: none"
-      >
-        <div class="title-bar">
-          <div class="title-bar-text">
-            <img
-              src="./assets/images/documents.avif"
-              style="vertical-align: middle"
-              width="15px"
-              alt="documents"
-            />
-            AAVE Semantic Similarity Statistics
-          </div>
-          <div class="title-bar-controls">
-            <button
-              aria-label="Minimize"
-              onclick="toggleWindow('projects-window')"
-            ></button>
-            <button
-              aria-label="Close"
-              onclick="toggleWindow('projects-window', 'close')"
-            ></button>
-          </div>
+  <!-- Projects window -->
+  <div class="move" id="projects-container">
+    <div class="window" id="projects-window" style="width: 760px; max-width: 90vw; display: none">
+      <div class="title-bar">
+        <div class="title-bar-text">AAVE Semantic Similarity Statistics</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize" onclick="toggleWindow('projects-window')"></button>
+          <button aria-label="Close" onclick="toggleWindow('projects-window', 'close')"></button>
         </div>
-        <div
-          class="window-body"
-          id="projects"
-          style="overflow: auto; max-height: 650px"
-        >
-          <h3>AAVE &amp; NLP – Movie Similarity Analysis</h3>
-          <p>
-            Sort columns, search for a movie, or scroll to see the top 5 most
-            similar tweets for each script.
-          </p>
-
-          <table
+      </div>
+      <div class="window-body" id="projects" style="overflow: auto; max-height: 650px">
+        <h3>AAVE & NLP — Movie Similarity Analysis</h3>
+        <p>Sort columns, search for a movie, or scroll to see the top 5 most similar tweets for each script.</p>
+        <table
             id="projects-table"
             class="display"
             style="width: 100%; background: white"
@@ -800,256 +1021,326 @@
               </tr>
             </tbody>
           </table>
-        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Browser window (YouTube) -->
-    <div class="move" id="browser-container">
-      <div
-        class="window"
-        id="browser-window"
-        style="width: 806px; height: 624px; display: none"
-      >
-        <div class="title-bar">
-          <div class="title-bar-text">
-            <img
-              src="./assets/images/ie.avif"
-              style="vertical-align: middle"
-              width="15px"
-              alt="ie"
-            />
-            Internet Explorer
-          </div>
-          <div class="title-bar-controls">
-            <button
-              aria-label="Minimize"
-              onclick="toggleWindow('browser-window')"
-            ></button>
-            <button
-              aria-label="Maximize"
-              onclick="maximizeWindow('browser-window')"
-            ></button>
-            <button
-              aria-label="Close"
-              onclick="toggleWindow('browser-window', 'close')"
-            ></button>
-          </div>
-        </div>
-        <div class="window-body">
-          <iframe
-            id="browser-body"
-            width="800"
-            height="600"
-            src="https://www.youtube.com/embed/hitDQSoS624?start=500"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
-    </div>
-
-<!-- Reflections window -->
-<div class="move" id="guestbook-container">
-  <div
-    class="window"
-    id="guestbook-window"
-    style="width: 806px; max-height: 624px; display: none"
-  >
+    <!-- Lexical Analysis -->
+<div class="move" id="lexical-container">
+  <div class="window" id="lexical-window" style="width: 700px; max-height: 650px; display: none">
     <div class="title-bar">
       <div class="title-bar-text">
         <img
-          src="./assets/images/guestbook.avif"
+          src="./assets/images/documents.avif"
           style="vertical-align: middle"
           width="15px"
-          alt="reflections"
+          alt="documents"
         />
-        Reflections &amp; Findings
+        AAVE Lexical Usage Analysis
       </div>
       <div class="title-bar-controls">
         <button
           aria-label="Minimize"
-          onclick="toggleWindow('guestbook-window')"
+          onclick="toggleWindow('lexical-window')"
         ></button>
         <button
           aria-label="Close"
-          onclick="toggleWindow('guestbook-window', 'close')"
+          onclick="toggleWindow('lexical-window', 'close')"
         ></button>
       </div>
     </div>
+    <div class="window-body" id="lexical-body" style="overflow: auto; max-height: 600px">
+      <menu role="tablist">
+        <button aria-selected="true" id="lex-btn1" onclick="toggleLexicalTabs(0)">
+          Overview
+        </button>
+        <button id="lex-btn2" onclick="toggleLexicalTabs(1)">
+          By Movie
+        </button>
+        <button id="lex-btn3" onclick="toggleLexicalTabs(2)">
+          Top Terms
+        </button>
+      </menu>
 
-    <!-- scrolling happens on window-body -->
-    <div
-      class="window-body"
-      style="max-height: 560px; overflow-y: auto; box-sizing: border-box; padding-top: 12px;"
-    >
-      <div id="reflections-body">
-        <h2>Reflection</h2>
-        <p>
-          I first applied an n-gram dictionary matching procedure to see if
-          there was a demonstrable amount of AAVE usage in the selected
-          films. Using a cleaned AAVE glossary, each script was evaluated for
-          single-word and multi-word AAVE expressions.
-          <em>Next Friday</em> was used as the control, as it is widely
-          considered Black media. <em>Next Friday</em> contained more
-          identifiable AAVE terms than movies such as
-          <em>Bridesmaids</em>, <em>Superbad</em>, or
-          <em>The Hangover</em>; however, it was still present in non-Black
-          films.
-        </p>
-        <p>
-          This step confirmed that AAVE is used in some scripts written from
-          a non-Black perspective. Still, I was able to reach this conclusion
-          based on my familiarity with AAVE, and it may be more challenging
-          and intensive for less familiar researchers to get the same
-          conclusion.
-        </p>
+      <!-- Tab 1: Overview -->
+      <article role="tabpanel" style="display: block" id="lexical-tab-1">
+        <fieldset>
+          <legend>AAVE Density Overview</legend>
+          <table class="lexical-table">
+            <thead>
+              <tr>
+                <th>Movie</th>
+                <th>Total Words</th>
+                <th>AAVE Terms</th>
+                <th>Density (%)</th>
+                <th>Unique Terms</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Next Friday</td>
+                <td>15,665</td>
+                <td>111</td>
+                <td>0.71%</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>Superbad</td>
+                <td>15,665</td>
+                <td>111</td>
+                <td>0.71%</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>Bridesmaids</td>
+                <td>15,665</td>
+                <td>111</td>
+                <td>0.71%</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>Hot Tub Time Machine</td>
+                <td>15,665</td>
+                <td>111</td>
+                <td>0.71%</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>Harold & Kumar</td>
+                <td>25,891</td>
+                <td>153</td>
+                <td>0.59%</td>
+                <td>28</td>
+              </tr>
+              <tr>
+                <td>The Hangover</td>
+                <td>20,568</td>
+                <td>86</td>
+                <td>0.42%</td>
+                <td>22</td>
+              </tr>
+              <tr>
+                <td>Scott Pilgrim</td>
+                <td>24,627</td>
+                <td>121</td>
+                <td>0.49%</td>
+                <td>26</td>
+              </tr>
+              <tr>
+                <td>Pineapple Express</td>
+                <td>21,970</td>
+                <td>149</td>
+                <td>0.68%</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>Ted</td>
+                <td>26,819</td>
+                <td>130</td>
+                <td>0.48%</td>
+                <td>29</td>
+              </tr>
+              <tr>
+                <td>Tropic Thunder</td>
+                <td>21,331</td>
+                <td>157</td>
+                <td>0.74%</td>
+                <td>36</td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </article>
 
-        <h3>Semantic Similarity Results (Cosine Similarity)</h3>
-        <p>
-          Across all films, the semantic similarity scores cluster tightly
-          together, regardless of whether the film uses noticeable AAVE
-          features. Some cursory clustering shows:
-        </p>
+      <!-- Tab 2: By Movie Details -->
+      <article role="tabpanel" style="display: none" id="lexical-tab-2">
+        <fieldset>
+          <legend>Detailed Breakdown</legend>
+          <div class="movie-detail">
+            <h3>Next Friday (2000)</h3>
+            <p><strong>AAVE Coverage:</strong> 10.55% of AAVE glossary used</p>
+            <p><strong>Unique Terms Found:</strong> bank, beat, been, boss, drop, extra, fire, ghetto, hit, ice, if, imma, laid, mad, mean, n, real, roll, school, snatched, thick, tight, trash, trip, wig</p>
+          </div>
+          <hr />
+          
+          <div class="movie-detail">
+            <h3>Superbad (2007)</h3>
+            <p><strong>AAVE Coverage:</strong> 10.55% of AAVE glossary used</p>
+            <p><strong>Unique Terms Found:</strong> bank, beat, been, boss, drop, extra, fire, ghetto, hit, ice, if, imma, laid, mad, mean, n, real, roll, school, snatched, thick, tight, trash, trip, wig</p>
+          </div>
+          <hr />
+          
+          <div class="movie-detail">
+            <h3>Harold & Kumar Go to White Castle (2004)</h3>
+            <p><strong>AAVE Coverage:</strong> 11.81% of AAVE glossary used</p>
+            <p><strong>Unique Terms Found:</strong> beat, beef, been, carry, chill, cop, dime, done, dope, drag, drop, dry, extra, filthy, fire, hit, if, laid, lit, mad, mans, mean, n, read, roll, school, thick, trip</p>
+          </div>
+          <hr />
+          
+          <div class="movie-detail">
+            <h3>The Hangover (2009)</h3>
+            <p><strong>AAVE Coverage:</strong> 9.28% of AAVE glossary used</p>
+            <p><strong>Unique Terms Found:</strong> bank, beat, been, bet, boss, coin, done, filthy, fire, g, hit, ice, if, laid, mad, mans, mean, pressed, real, roll, school, tight</p>
+          </div>
+          <hr />
+          
+          <div class="movie-detail">
+            <h3>Tropic Thunder (2008)</h3>
+            <p><strong>AAVE Coverage:</strong> 15.19% of AAVE glossary used (highest)</p>
+            <p><strong>Unique Terms Found:</strong> bank, beat, been, bet, cap, carry, cat, chill, din, done, drag, drop, dry, fierce, fire, g, heated, hit, if, link, mad, mans, mean, n, playin, plug, read, real, roll, school, serve, slumped, tea, thick, trip, vibe</p>
+          </div>
+        </fieldset>
+      </article>
 
-        <h4>High Similarity Cluster (~0.20–0.23)</h4>
-        <ul>
-          <li><em>Next Friday</em> — 0.2208</li>
-          <li><em>Bridesmaids</em> — 0.2217</li>
-          <li><em>The Hangover</em> — 0.2339</li>
-          <li><em>Superbad</em> — 0.2013</li>
-          <li><em>Hot Tub Time Machine</em> — 0.2040</li>
-        </ul>
-
-        <h4>Mid/Low Similarity Cluster</h4>
-        <ul>
-          <li><em>Pineapple Express</em> — 0.1743</li>
-          <li><em>Ted</em> — 0.1471</li>
-          <li><em>Tropic Thunder</em> — 0.1872</li>
-        </ul>
-
-        <h4>Outlier Low Similarity</h4>
-        <ul>
-          <li>
-            <em>Harold &amp; Kumar Go to White Castle</em> — 0.0892 (least
-            similar overall)
-          </li>
-        </ul>
-
-        <p>
-          What is striking is that the film with the most AAVE lexical
-          content (<em>Next Friday</em>) has nearly the same semantic
-          similarity score as films with comparatively little AAVE usage.
-          This pattern also extends to the mean similarities, max
-          similarities, and similarity distributions. These metrics also
-          remain tightly clustered across all nine films, despite dramatic
-          differences in cultural grounding, dialogue style, register, and
-          character demographics.
-        </p>
-
-        <h3>Why the Model Behaves This Way</h3>
-        <p>The SentenceTransformer MiniLM model primarily encodes:</p>
-        <ul>
-          <li>
-            topical similarity (conflict, relationships, humor, family,
-            drama)
-          </li>
-          <li>emotional tone</li>
-          <li>discourse structure</li>
-        </ul>
-
-        <p>What it does <strong>not</strong> encode well includes:</p>
-        <ul>
-          <li>
-            vernacular features (AAVE syntax, habitual "be," copula absence,
-            negative concord)
-          </li>
-          <li>racialized linguistic identity</li>
-          <li>code-switching</li>
-          <li>cultural context</li>
-          <li>sociolinguistic register</li>
-        </ul>
-
-        <p>
-          As a result, even when AAVE-heavy tweets contain distinctly Black
-          cultural and linguistic markers, the model maps them into a generic
-          "informal comedic dialogue" space that many movies occupy—
-          regardless of cultural specificity.
-        </p>
-
-        <p><strong>Consequently:</strong></p>
-        <ul>
-          <li>
-            <em>Next Friday</em> and <em>Bridesmaids</em> appear almost
-            identical to the model (~0.22 cosine).
-          </li>
-          <li>
-            Films with different racial and cultural grounding
-            (<em>Hot Tub Time Machine</em>, <em>Superbad</em>,
-            <em>The Hangover</em>) still fall in the same cluster.
-          </li>
-          <li>
-            More unusual films (<em>Harold &amp; Kumar</em>,
-            <em>Scott Pilgrim</em>) appear lower only because they diverge in
-            <strong>topic</strong>, not linguistic style.
-          </li>
-        </ul>
-
-        <h3>Implications: Structural Erasure of AAVE in Machine Learning Models</h3>
-        <ol>
-          <li>
-            <strong>AAVE appears invisible in semantic embedding space.</strong>
-            Even when a script contains unmistakable AAVE terms and Black
-            cultural rhetoric, the model collapses those linguistic features
-            into generic English structures.
-          </li>
-          <li>
-            <strong>Topic overrides dialect.</strong> The embeddings capture
-            what is being discussed, not how it is expressed. Movies about
-            interpersonal chaos, family conflict, and humor score similarly—
-            even if the language used is culturally specific.
-          </li>
-          <li>
-            <strong>AAVE is underrepresented in training data.</strong>
-            MiniLM was trained on standard and majority-coded English
-            corpora. As a result, AAVE patterns are treated as statistical
-            noise rather than meaningful signals.
-          </li>
-          <li>
-            <strong>
-              Dialectal and cultural distinctions collapse into a single
-              semantic space.
-            </strong>
-            From the model's perspective, all these movies are just "comedy
-            scripts about messy people," regardless of race, culture, or
-            vernacular.
-          </li>
-          <li>
-            <strong>This extends beyond AAVE.</strong> Other minoritized
-            Englishes (Chicano English, Hawaiian Pidgin, Cajun English,
-            Caribbean English, Appalachian English) would similarly be
-            flattened.
-          </li>
-        </ol>
-
-        <h3>What These Results Demonstrate</h3>
-        <p>
-          General-purpose NLP models can detect thematic similarity across
-          texts but fail to represent or distinguish the linguistic,
-          cultural, and racialized nuances encoded in AAVE. AAVE is
-          "standardized away" when vectorized. Machine learning systems
-          reproduce existing linguistic hierarchies by not accounting for
-          diverse English dialects. Without explicit dialect-aware training
-          corpora, models will continue to erase the linguistic complexities
-          of marginalized communities.
-        </p>
-      </div>
+      <!-- Tab 3: Top Terms -->
+      <article role="tabpanel" style="display: none" id="lexical-tab-3">
+        <fieldset>
+          <legend>Most Frequent AAVE Terms by Movie</legend>
+          
+          <div class="top-terms">
+            <h4>Next Friday</h4>
+            <ol>
+              <li><strong>if</strong> (25 occurrences)</li>
+              <li><strong>imma</strong> (24)</li>
+              <li><strong>hit</strong> (13)</li>
+              <li><strong>been</strong> (9)</li>
+              <li><strong>real</strong> (6)</li>
+            </ol>
+          </div>
+          
+          <div class="top-terms">
+            <h4>Harold & Kumar</h4>
+            <ol>
+              <li><strong>if</strong> (43 occurrences)</li>
+              <li><strong>been</strong> (31)</li>
+              <li><strong>hit</strong> (15)</li>
+              <li><strong>cop</strong> (13)</li>
+              <li><strong>school</strong> (9)</li>
+            </ol>
+          </div>
+          
+          <div class="top-terms">
+            <h4>The Hangover</h4>
+            <ol>
+              <li><strong>if</strong> (29 occurrences)</li>
+              <li><strong>been</strong> (15)</li>
+              <li><strong>real</strong> (6)</li>
+              <li><strong>tight</strong> (5)</li>
+              <li><strong>beat</strong> (4)</li>
+            </ol>
+          </div>
+          
+          <div class="top-terms">
+            <h4>Scott Pilgrim</h4>
+            <ol>
+              <li><strong>if</strong> (46 occurrences)</li>
+              <li><strong>been</strong> (16)</li>
+              <li><strong>school</strong> (12)</li>
+              <li><strong>mean</strong> (8)</li>
+              <li><strong>hit</strong> (5)</li>
+            </ol>
+          </div>
+          
+          <div class="top-terms">
+            <h4>Pineapple Express</h4>
+            <ol>
+              <li><strong>if</strong> (41 occurrences)</li>
+              <li><strong>cop</strong> (20)</li>
+              <li><strong>been</strong> (18)</li>
+              <li><strong>hit</strong> (14)</li>
+              <li><strong>school</strong> (9)</li>
+            </ol>
+          </div>
+          
+          <div class="top-terms">
+            <h4>Ted</h4>
+            <ol>
+              <li><strong>if</strong> (41 occurrences)</li>
+              <li><strong>been</strong> (23)</li>
+              <li><strong>mean</strong> (8)</li>
+              <li><strong>hit</strong> (8)</li>
+              <li><strong>beat</strong> (4)</li>
+            </ol>
+          </div>
+          
+          <div class="top-terms">
+            <h4>Tropic Thunder</h4>
+            <ol>
+              <li><strong>if</strong> (37 occurrences)</li>
+              <li><strong>real</strong> (19)</li>
+              <li><strong>been</strong> (19)</li>
+              <li><strong>fire</strong> (10)</li>
+              <li><strong>mean</strong> (10)</li>
+            </ol>
+          </div>
+        </fieldset>
+      </article>
     </div>
   </div>
 </div>
+
     
-    <!-- Taskbar -->
+  <!-- Browser window -->
+  <div class="move" id="browser-container">
+    <div class="window" id="browser-window" style="width: 806px; height: 624px; display: none">
+      <div class="title-bar">
+        <div class="title-bar-text">Internet Explorer</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize" onclick="toggleWindow('browser-window')"></button>
+          <button aria-label="Maximize" onclick="maximizeWindow('browser-window')"></button>
+          <button aria-label="Close" onclick="toggleWindow('browser-window', 'close')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <iframe id="browser-body" width="800" height="600" src="https://www.youtube.com/embed/hitDQSoS624?start=500" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reflections window -->
+  <div class="move" id="guestbook-container">
+    <div class="window" id="guestbook-window" style="width: 806px; max-height: 624px; display: none">
+      <div class="title-bar">
+        <div class="title-bar-text">Reflections & Findings</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize" onclick="toggleWindow('guestbook-window')"></button>
+          <button aria-label="Close" onclick="toggleWindow('guestbook-window', 'close')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div id="reflections-body">
+          <h2>Reflection</h2>
+          <p>I first applied an n-gram dictionary matching procedure to see if there was a demonstrable amount of AAVE usage in the selected films. Using a cleaned AAVE glossary, each script was evaluated for single-word and multi-word AAVE expressions.</p>
+          
+          <h3>Semantic Similarity Results (Cosine Similarity)</h3>
+          <p>Across all films, the semantic similarity scores cluster tightly together, regardless of whether the film uses noticeable AAVE features.</p>
+
+          <h4>High Similarity Cluster (~0.20–0.23)</h4>
+          <ul>
+            <li><em>Next Friday</em> – 0.2208</li>
+            <li><em>Bridesmaids</em> – 0.2217</li>
+            <li><em>The Hangover</em> – 0.2339</li>
+            <li><em>Superbad</em> – 0.2013</li>
+          </ul>
+
+          <h3>Why the Model Behaves This Way</h3>
+          <p>The SentenceTransformer MiniLM model primarily encodes topical similarity, emotional tone, and discourse structure. What it does <strong>not</strong> encode well includes vernacular features, racialized linguistic identity, code-switching, cultural context, and sociolinguistic register.</p>
+
+          <h3>Implications: Structural Erasure of AAVE in Machine Learning Models</h3>
+          <ol>
+            <li><strong>AAVE appears invisible in semantic embedding space.</strong> Even when a script contains unmistakable AAVE terms and Black cultural rhetoric, the model collapses those linguistic features into generic English structures.</li>
+            <li><strong>Topic overrides dialect.</strong> The embeddings capture what is being discussed, not how it is expressed.</li>
+            <li><strong>AAVE is underrepresented in training data.</strong> MiniLM was trained on standard and majority-coded English corpora.</li>
+          </ol>
+
+          <h3>What These Results Demonstrate</h3>
+          <p>General-purpose NLP models can detect thematic similarity across texts but fail to represent or distinguish the linguistic, cultural, and racialized nuances encoded in AAVE. Machine learning systems reproduce existing linguistic hierarchies by not accounting for diverse English dialects.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
     <div class="taskbar">
       <div class="start-button">
         <img src="./assets/images/logo.avif" alt="start button" /> start
@@ -1091,221 +1382,222 @@
           <img src="./assets/images/guestbook.avif" alt="guestbook" />
           Reflections
         </div>
+        <div
+          class="open-tab"
+          id="lexical-button"
+          onclick="toggleWindow('lexical-window')"
+        >
+          <img src="./assets/images/documents.avif" alt="lexical" /> Lexical Analysis
+        </div>  
       </div>
       <div class="time" id="clock">00:00 PM</div>
     </div>
 
-    <!-- Core JS -->
-    <script>
-      // Map window ids <-> taskbar button ids
-      const windowToButton = {
-        "network-window": "network-button",
-        "projects-window": "projects-button",
-        "cmd-window": "cmd-button",
-        "browser-window": "browser-button",
-        "guestbook-window": "guestbook-button",
-      };
+  <script>
+    // Update the windowToButton mapping to include lexical window
+    const windowToButton = {
+      "network-window": "network-button",
+      "projects-window": "projects-button",
+      "cmd-window": "cmd-button",
+      "browser-window": "browser-button",
+      "guestbook-window": "guestbook-button",
+      "lexical-window": "lexical-button"  
+    };
+      
+    function toggleLexicalTabs(tabIndex) {
+      const buttons = document.querySelectorAll("#lexical-body menu button");
+      const tabs = document.querySelectorAll("#lexical-body article");
 
-      function setButtonActive(windowId, isActive) {
-        const btnId = windowToButton[windowId];
-        if (!btnId) return;
-        const btn = document.getElementById(btnId);
-        if (!btn) return;
+      buttons.forEach((button, index) => {
+        button.setAttribute("aria-selected", index === tabIndex);
+        tabs[index].style.display = index === tabIndex ? "block" : "none";
+      });
+    }
+      
+    function setButtonActive(windowId, isActive) {
+      const btnId = windowToButton[windowId];
+      if (!btnId) return;
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
 
-        if (isActive) {
-          btn.style.display = "flex";
-          btn.classList.add("active");
-        } else {
-          btn.style.display = "none";
-          btn.classList.remove("active");
-        }
+      if (isActive) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
       }
+    }
 
-      // Toggle show/hide a window
-      function toggleWindow(windowId, action) {
-        const win = document.getElementById(windowId);
-        if (!win) return;
-        if (action === "close") {
-          win.style.display = "none";
-          setButtonActive(windowId, false);
+    function toggleWindow(windowId, action) {
+      const win = document.getElementById(windowId);
+      if (!win) return;
+      
+      if (action === "close") {
+        win.style.display = "none";
+        setButtonActive(windowId, false);
+        return;
+      }
+      
+      const current = win.style.display;
+      if (current === "none" || current === "") {
+        win.style.display = "block";
+        setButtonActive(windowId, true);
+      } else {
+        win.style.display = "none";
+        setButtonActive(windowId, false);
+      }
+    }
+
+    function maximizeWindow(windowId) {
+      const win = document.getElementById(windowId);
+      if (!win) return;
+
+      const isMax = win.dataset.maximized === "true";
+
+      if (!isMax) {
+        win.dataset.prevWidth = win.style.width;
+        win.dataset.prevHeight = win.style.height;
+        win.style.position = "fixed";
+        win.style.top = "0";
+        win.style.left = "0";
+        win.style.right = "0";
+        win.style.bottom = "40px";
+        win.dataset.maximized = "true";
+      } else {
+        win.style.position = "";
+        win.style.top = "";
+        win.style.left = "";
+        win.style.right = "";
+        win.style.bottom = "";
+        win.style.width = win.dataset.prevWidth || win.style.width;
+        win.style.height = win.dataset.prevHeight || win.style.height;
+        win.dataset.maximized = "false";
+      }
+    }
+
+        // Update doubleClick function to include lexical
+    function doubleClick(iconId, target) {
+      if (target === "toggle") {
+        const map = {
+          network: "network-window",
+          projects: "projects-window",
+          cmd: "cmd-window",
+          browser: "browser-window",
+          guestbook: "guestbook-window",
+          lexical: "lexical-window"  // ADD THIS LINE
+        };
+        const winId = map[iconId];
+        if (winId) toggleWindow(winId);
+      } else if (target) {
+        window.open(target, "_blank");
+      }
+    }
+
+    function updateClock() {
+      const clock = document.getElementById("clock");
+      if (!clock) return;
+      const now = new Date();
+      let h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, "0");
+      const ampm = h >= 12 ? "PM" : "AM";
+      h = ((h + 11) % 12) + 1;
+      clock.textContent = `${h}:${m} ${ampm}`;
+    }
+
+    function initDragging() {
+      let active = null;
+      let offsetX = 0;
+      let offsetY = 0;
+      let z = 10;
+
+      document.querySelectorAll(".move .title-bar").forEach((bar) => {
+        bar.style.cursor = "move";
+
+        bar.addEventListener("mousedown", (e) => {
+          const container = bar.closest(".move");
+          if (!container) return;
+
+          active = container;
+          z += 1;
+          active.style.zIndex = z;
+
+          const rect = active.getBoundingClientRect();
+          offsetX = e.clientX - rect.left;
+          offsetY = e.clientY - rect.top;
+
+          document.addEventListener("mousemove", onMouseMove);
+          document.addEventListener("mouseup", onMouseUp);
+        });
+      });
+
+      function onMouseMove(e) {
+        if (!active) return;
+        if (e.buttons === 0) {
+          onMouseUp();
           return;
         }
-        const current = win.style.display;
-        if (current === "none" || current === "") {
-          win.style.display = "block";
-          setButtonActive(windowId, true);
-        } else {
-          win.style.display = "none";
-          setButtonActive(windowId, false);
-        }
+
+        let newLeft = e.clientX - offsetX;
+        let newTop = e.clientY - offsetY;
+
+        const winWidth = window.innerWidth;
+        const winHeight = window.innerHeight;
+        const elemWidth = active.offsetWidth || 400;
+        const elemHeight = active.offsetHeight || 300;
+
+        // Keep title bar visible - FIXED BOUNDARIES
+        const titleBarHeight = 30;
+        const taskbarHeight = 40;
+        const minVisiblePx = 100;
+
+        // Top boundary - keep title bar in view
+        if (newTop < 0) newTop = 0;
+        
+        // Bottom boundary - keep above taskbar
+        const maxTop = winHeight - taskbarHeight - titleBarHeight;
+        if (newTop > maxTop) newTop = maxTop;
+
+        // Left boundary - keep partially visible
+        const minLeft = -elemWidth + minVisiblePx;
+        if (newLeft < minLeft) newLeft = minLeft;
+
+        // Right boundary - keep partially visible
+        const maxLeft = winWidth - minVisiblePx;
+        if (newLeft > maxLeft) newLeft = maxLeft;
+
+        active.style.left = `${newLeft}px`;
+        active.style.top = `${newTop}px`;
       }
 
-      // Maximize toggle
-      function maximizeWindow(windowId) {
-        const win = document.getElementById(windowId);
-        if (!win) return;
-
-        const isMax = win.dataset.maximized === "true";
-
-        if (!isMax) {
-          win.dataset.prevWidth = win.style.width;
-          win.dataset.prevHeight = win.style.height;
-
-          win.style.position = "fixed";
-          win.style.top = "0";
-          win.style.left = "0";
-          win.style.right = "0";
-          win.style.bottom = "40px";
-
-          win.dataset.maximized = "true";
-        } else {
-          win.style.position = "";
-          win.style.top = "";
-          win.style.left = "";
-          win.style.right = "";
-          win.style.bottom = "";
-
-          win.style.width = win.dataset.prevWidth || win.style.width;
-          win.style.height = win.dataset.prevHeight || win.style.height;
-
-          win.dataset.maximized = "false";
-        }
+      function onMouseUp() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+        active = null;
       }
+    }
 
-      // Desktop icon click handler
-      function doubleClick(iconId, target) {
-        const clickSound = document.getElementById("click-sound");
-        if (clickSound) {
-          clickSound.currentTime = 0;
-          clickSound.play().catch(() => {});
-        }
-
-        if (target === "toggle") {
-          const map = {
-            network: "network-window",
-            projects: "projects-window",
-            cmd: "cmd-window",
-            browser: "browser-window",
-            guestbook: "guestbook-window",
-          };
-          const winId = map[iconId];
-          if (winId) toggleWindow(winId);
-        } else if (target) {
-          window.open(target, "_blank");
-        }
-      }
-
-      // XP Clock
-      function updateClock() {
-        const clock = document.getElementById("clock");
-        if (!clock) return;
-
-        const now = new Date();
-        let h = now.getHours();
-        const m = String(now.getMinutes()).padStart(2, "0");
-        const ampm = h >= 12 ? "PM" : "AM";
-        h = ((h + 11) % 12) + 1;
-
-        clock.textContent = `${h}:${m} ${ampm}`;
-      }
-
-      // Window dragging with bounds
-      function initDragging() {
-        let active = null;
-        let offsetX = 0;
-        let offsetY = 0;
-        let z = 10;
-
-        document.querySelectorAll(".move .title-bar").forEach((bar) => {
-          bar.style.cursor = "move";
-
-          bar.addEventListener("mousedown", (e) => {
-            const container = bar.closest(".move");
-            if (!container) return;
-
-            active = container;
-            z += 1;
-            active.style.zIndex = z;
-
-            const rect = active.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
-
-            document.addEventListener("mousemove", onMouseMove);
-            document.addEventListener("mouseup", onMouseUp);
-          });
+    document.addEventListener("DOMContentLoaded", function () {
+      if (document.querySelector("#projects-table")) {
+        new DataTable("#projects-table", {
+          paging: false,
+          info: false,
+          lengthChange: false,
+          searching: true,
+          ordering: true,
+          scrollY: "460px",
+          scrollCollapse: true,
+          scrollX: true,
+          order: [[2, "desc"]],
         });
-
-        function onMouseMove(e) {
-          if (!active) return;
-
-          if (e.buttons === 0) {
-            onMouseUp();
-            return;
-          }
-
-          let newLeft = e.clientX - offsetX;
-          let newTop = e.clientY - offsetY;
-
-          const winWidth = window.innerWidth;
-          const winHeight = window.innerHeight;
-          const elemWidth = active.offsetWidth || 400;
-          const elemHeight = active.offsetHeight || 300;
-
-          const minVisiblePx = 100;
-
-          if (newTop < 0) newTop = 0;
-          const maxTop = winHeight - 40 - 30;
-          if (newTop > maxTop) newTop = maxTop;
-
-          const minLeft = -elemWidth + minVisiblePx;
-          if (newLeft < minLeft) newLeft = minLeft;
-
-          const maxLeft = winWidth - minVisiblePx;
-          if (newLeft > maxLeft) newLeft = maxLeft;
-
-          active.style.left = `${newLeft}px`;
-          active.style.top = `${newTop}px`;
-        }
-
-        function onMouseUp() {
-          document.removeEventListener("mousemove", onMouseMove);
-          document.removeEventListener("mouseup", onMouseUp);
-          active = null;
-        }
       }
 
-      // Initialize everything
-      document.addEventListener("DOMContentLoaded", function () {
-        if (document.querySelector("#projects-table")) {
-          new DataTable("#projects-table", {
-            paging: false,
-            info: false,
-            lengthChange: false,
-            searching: true,
-            ordering: true,
-            scrollY: "460px",
-            scrollCollapse: true,
-            scrollX: true,
-            order: [[2, "desc"]],
-          });
-        }
-
-        Object.keys(windowToButton).forEach((winId) => {
-          setButtonActive(winId, false);
-        });
-
-        updateClock();
-        setInterval(updateClock, 60000);
-
-        initDragging();
+      Object.keys(windowToButton).forEach((winId) => {
+        setButtonActive(winId, false);
       });
-    </script>
 
-    <audio
-      id="click-sound"
-      src="assets/audio/click.mp3"
-      preload="auto"
-    ></audio>
-  </body>
+      updateClock();
+      setInterval(updateClock, 60000);
+      initDragging();
+    });
+  </script>
+</body>
 </html>
