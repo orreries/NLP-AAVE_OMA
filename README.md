@@ -69,8 +69,6 @@ Farrior, C., & Lester, N. A. (2024). Digital Blackface: Adultification of Black 
 
 Galileo AI. (n.d.). Semantic textual similarity metric guide for AI applications. Retrieved December 7, 2025, from https://galileo.ai/blog/semantic-textual-similarity-metric
 
-NPR. (n.d.). The "post-racial" conversation, one year in. Retrieved December 7, 2025, from https://www.npr.org/2010/01/18/122701272/the-post-racial-conversation-one-year-in
-
 Petty, J. (2024). Text analysis without AI: Lexical density, string similarity, readability & other metrics. GreenFlux Blog. https://blog.greenflux.us/text-analysis-without-ai-lexical-density-string-similarity-readability-other-metrics/
 
 Powell, J. A. (2009). Post-racialism or targeted universalism. *Denver University Law Review, 86*, 785.
@@ -93,8 +91,6 @@ Wired. (n.d.). The new minstrels are here. Retrieved December 2, 2024, from http
 io)
 
 NPR. (n.d.). The "post-racial" conversation, one year in. Retrieved December 7, 2025, from https://www.npr.org/2010/01/18/122701272/the-post-racial-conversation-one-year-in
-
-Petty, J. (2024). Text analysis without AI: Lexical density, string similarity, readability & other metrics. GreenFlux Blog. https://blog.greenflux.us/text-analysis-without-ai-lexical-density-string-similarity-readability-other-metrics/
 
 ## Theme
 Made by [bitboody](https://github.com/bitboody/bitboody.github.io)
